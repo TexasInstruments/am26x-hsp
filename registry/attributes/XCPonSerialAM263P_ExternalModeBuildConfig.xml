@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<productinfo version="3.0">
+  <name>XCP on Serial AM263P</name>
+  <buildconfigurationinfo AssemblyFlags="" CPPCompileFlags="" CPPLinkFlags="" CompileFlags="" LinkFlags="">
+    <Name>XCP on Serial AM263P</Name>
+    <SourceFiles>$(TARGET_ROOT)/src/xcp_platform_custom.c</SourceFiles>
+    <SourceFiles>$(TARGET_ROOT)/src/rtiostream_serial_am263p.c</SourceFiles>
+    <SupportedOperatingSystems>all</SupportedOperatingSystems>
+    <SupportedToolchains>all</SupportedToolchains>
+  </buildconfigurationinfo>
+</productinfo>

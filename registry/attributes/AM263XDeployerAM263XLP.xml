@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<productinfo version="3.0">
+  <name>AM263X Deployer</name>
+  <targetname>AM263X LP</targetname>
+  <targetinitializationcall>am263x_HardwareInit_Fcn()</targetinitializationcall>
+  <pilinfo>
+    <Name>PIL on Serial</Name>
+    <Transport AvailableBaudrates="115200" AvailableCOMPorts="COM1" Baudrate="115200" COMPort="COM1" Type="serial">
+      <Name>PIL on Serial</Name>
+      <IOInterfaceName>PIL on Serial</IOInterfaceName>
+    </Transport>
+  </pilinfo>
+  <includefile>am263x_main.h</includefile>
+  <needsmainfcn>true</needsmainfcn>
+  <mainfcnsignature>int main(int argc, char **argv)</mainfcnsignature>
+  <token Name="ARMCORTEXR_ROOT_DIR" Value="matlabshared.target.am26x.getReferenceTargetRootFolder"/>
+  <onhardwareselecthook>am263x.onHardwareSelectHook</onhardwareselecthook>
+  <detectoverrun>false</detectoverrun>
+  <honorruntimestoprequest>true</honorruntimestoprequest>
+  <sdcardinbackgroundtask>false</sdcardinbackgroundtask>
+  <includestdio>true</includestdio>
+  <enableoneclick>true</enableoneclick>
+  <externalmodemonitorandtunestatefcn>setMonitorAndTuneState</externalmodemonitorandtunestatefcn>
+  <externalmodestepbystepcmdsstatefcn>setStepByStepCmdsState</externalmodestepbystepcmdsstatefcn>
+  <externalmodeinfo closefcn="" connectfcn="" postdisconnecttargetfcn="" setupfcn="">
+    <name>XCP on Serial AM263</name>
+    <buildconfigurationinfofile>$(TARGET_ROOT)/registry/attributes/XCPonSerialAM263_ExternalModeBuildConfig.xml</buildconfigurationinfofile>
+    <preconnectfcn>pause(5);</preconnectfcn>
+    <transport availablebaudrates="NaN" type="serial">
+      <comport value="COM1">
+        <visible>true</visible>
+      </comport>
+      <baudrate value="115200">
+        <visible>true</visible>
+      </baudrate>
+      <verbose>
+        <value>false</value>
+        <visible>true</visible>
+      </verbose>
+      <availablecomports>COM1</availablecomports>
+      <name>XCP on Serial</name>
+      <iointerfacename>XCP on Serial AM263</iointerfacename>
+    </transport>
+    <task default="background">
+      <inbackground>true</inbackground>
+      <inforeground>false</inforeground>
+      <visible>false</visible>
+    </task>
+  </externalmodeinfo>
+  <externalmodeinfo closefcn="extModeXCPCANCloseHook(hObj)" connectfcn="" postdisconnecttargetfcn="" setupfcn="addXCPSupport(hObj)">
+    <name>CAN</name>
+    <buildconfigurationinfofile>$(TARGET_ROOT)/registry/attributes/CAN_ExternalModeBuildConfig.xml</buildconfigurationinfofile>
+    <preconnectfcn>pause(5);</preconnectfcn>
+    <modelparameter callback="" name="OnTargetWaitForStart" value="on"/>
+    <codertargetparameter callback="" name="Runtime.BuildAction">
+      <value>Build, load and run</value>
+    </codertargetparameter>
+    <transport iointerfacename="CAN" type="can">
+      <canvendor value="Vector">
+        <visible>true</visible>
+      </canvendor>
+      <candevice value="Channellist1">
+        <visible>true</visible>
+      </candevice>
+      <canchannel value="1">
+        <visible>true</visible>
+      </canchannel>
+      <busspeed value="500000">
+        <visible>true</visible>
+      </busspeed>
+      <canidcommand value="35">
+        <visible>true</visible>
+      </canidcommand>
+      <canidresponse value="45">
+        <visible>true</visible>
+      </canidresponse>
+      <iscanidextended value="true">
+        <visible>true</visible>
+      </iscanidextended>
+      <verbose>
+        <value>true</value>
+        <visible>true</visible>
+      </verbose>
+      <name>XCP on CAN</name>
+    </transport>
+    <task default="background">
+      <inbackground>true</inbackground>
+      <inforeground>false</inforeground>
+      <visible>false</visible>
+    </task>
+    <protocolconfiguration>
+      <hostinterface value="Simulink">
+        <visible>true</visible>
+      </hostinterface>
+      <loggingbufferauto>
+        <value>true</value>
+        <visible>true</visible>
+      </loggingbufferauto>
+      <loggingbuffersize value="1000">
+        <visible>true</visible>
+      </loggingbuffersize>
+      <loggingbuffernum value="3">
+        <visible>false</visible>
+      </loggingbuffernum>
+      <maxcontigsamples value="10">
+        <visible>false</visible>
+      </maxcontigsamples>
+      <widthoftargetdoubleinbytes>4</widthoftargetdoubleinbytes>
+      <maxnumofodtswiththirdpartyhost>15</maxnumofodtswiththirdpartyhost>
+      <maxnumofodtentrieswiththirdpartyhost>7</maxnumofodtentrieswiththirdpartyhost>
+      <isbyteaddressgranularityemulation>false</isbyteaddressgranularityemulation>
+    </protocolconfiguration>
+  </externalmodeinfo>
+  <buildconfigurationinfofile>$(TARGET_ROOT)/registry/attributes/AM263XDebugBuildConfiguration.xml</buildconfigurationinfofile>
+</productinfo>

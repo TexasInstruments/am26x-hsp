@@ -1,0 +1,11 @@
+<productinfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="optional">
+<?xml-stylesheet type="text/xsl"href="optional"?>
+<!-- Copyright 2005-2007 The MathWorks Ltd.-->
+
+<matlabrelease>14</matlabrelease>
+<name>Embedded Coder Support Package for AM26X</name>
+<type>toolbox</type>
+<icon>$toolbox/matlab/icons/bookicon.gif</icon>
+<help_location>html</help_location>
+
+</productinfo>

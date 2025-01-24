@@ -1,0 +1,2 @@
+function extModeXCPCANCloseHook(hObj)
+end

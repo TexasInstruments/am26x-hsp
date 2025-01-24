@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<productinfo version="3.0">
+  <name>FreeRTOS LegacyBuildConfiguration</name>
+  <buildconfigurationinfo AssemblyFlags="" CPPCompileFlags="" CPPLinkFlags="" CompileFlags="" LinkFlags="">
+    <Defines>USE_FREERTOS</Defines>
+    <IncludePaths>$(TARGET_ROOT)/+freertos/include</IncludePaths>
+    <Name>FreeRTOS LegacyBuildConfiguration</Name>
+    <SourceFiles>$(TARGET_ROOT)/+freeRTOS/src/mw_freertos_init.c</SourceFiles>
+    <SourceFiles>$(TARGET_ROOT)/+freeRTOS/src/mw_thread.c</SourceFiles>
+    <SourceFiles>$(TARGET_ROOT)/+freeRTOS/src/mw_timer.c</SourceFiles>
+    <SourceFiles>$(TARGET_ROOT)/+freeRTOS/src/mw_semaphore.c</SourceFiles>
+    <SupportedOperatingSystems>all</SupportedOperatingSystems>
+    <SupportedToolchains>all</SupportedToolchains>
+  </buildconfigurationinfo>
+</productinfo>

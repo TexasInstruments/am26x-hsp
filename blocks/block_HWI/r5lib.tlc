@@ -1,0 +1,43 @@
+%% 
+%% 
+%% 
+%%
+%%
+
+
+
+
+
+  
+  %%
+  %% Add TI include files
+  %%
+  
+  %openfile buffer
+  
+  /* include header files for TI devices */
+  #include "hwi_include.h"
+  #include "MW_hwi.h"
+  
+  %closefile buffer
+  %<LibCacheDefine(buffer)>
+  
+
+%% [EOF] r5lib.tlc
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

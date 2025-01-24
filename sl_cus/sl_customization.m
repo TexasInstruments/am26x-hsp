@@ -1,0 +1,13 @@
+function sl_customization(cm)
+% SL_CUSTOMIZATION_XCP_ON_CAN registers the 'XCP on CAN' transport layer
+% for host-based targets
+
+%   Copyright 2021 The MathWorks, Inc.
+
+[transport, mexfile, interface] = Simulink.ExtMode.Transports.XCPCAN.toCell();
+
+cm.ExtModeTransports.add(...
+    'ert.tlc',...
+    transport,...
+    mexfile,...
+    interface);

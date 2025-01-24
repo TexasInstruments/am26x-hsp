@@ -1,0 +1,11 @@
+<?xml version='1.0' encoding='ISO-8859-1' ?>
+
+<!-- Copyright 2023 The MathWorks Ltd.-->
+<toc version="1.0">
+    <tocitem target="0_intro.html"> Embedded Coder Support Package 
+        <tocitem target="1_gs.html"> Getting Started </tocitem>
+        <tocitem target="2_rn.html"> Release Notes </tocitem>
+        <tocitem target="3_blocks.html"> Blocks </tocitem>
+        <tocitem target="4_examples.html"> Examples </tocitem>
+    </tocitem>
+</toc>

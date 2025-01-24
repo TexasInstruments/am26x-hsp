@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<productinfo>
+   <name>FreeRTOS</name>
+   <sourcefile>$(FREE_RTOS_SHRD_COMP_DIR)/src/mw_freertos_init.c</sourcefile>
+   <sourcefile>$(FREE_RTOS_SHRD_COMP_DIR)/src/mw_thread.c</sourcefile>
+   <sourcefile>$(FREE_RTOS_SHRD_COMP_DIR)/src/mw_timer.c</sourcefile>
+   <sourcefile>$(FREE_RTOS_SHRD_COMP_DIR)/src/mw_semaphore.c</sourcefile>
+   <includefile>mw_freertos.h</includefile>
+   <includepath>$(FREE_RTOS_SHRD_COMP_DIR)/include</includepath>
+   <includepath>$(START_DIR)/include</includepath>
+   <initcall>mw_RTOSInit</initcall>
+   <define>USE_FREERTOS</define>
+   <taskdatatype>mw_thread_t</taskdatatype>
+   <taskcreatecall>mw_osThreadCreate</taskcreatecall>
+   <taskexitcall>mw_osThreadExit</taskexitcall>
+   <taskjoincall>mw_osThreadJoin</taskjoincall>
+   <mutexdatatype>SemaphoreHandle_t</mutexdatatype>
+   <mutexinitcall>mw_osBinarySemaphoreCreate</mutexinitcall>
+   <mutexlockcall>mw_osSemaphoreWaitEver</mutexlockcall>
+   <mutexunlockcall>mw_osSemaphoreRelease</mutexunlockcall>
+   <mutextrylockcall>mw_osBinarySemaphoreTryLock</mutextrylockcall>
+   <mutexdestroycall>mw_osSemaphoreDelete</mutexdestroycall>
+   <semaphoredatatype>SemaphoreHandle_t</semaphoredatatype>
+   <semaphoreinitcall>mw_osSemaphoreCreate</semaphoreinitcall>
+   <semaphorewaitcall>mw_osSemaphoreWaitEver</semaphorewaitcall>
+   <semaphorepostcall>mw_osSemaphoreRelease</semaphorepostcall>
+   <semaphoredestroycall>mw_osSemaphoreDelete</semaphoredestroycall>
+   <eventdatatype>int</eventdatatype>
+   <eventwaitcall>mw_WaitForThisEvent</eventwaitcall>
+   <eventblockcall>mw_AddBlockForThisEvent</eventblockcall>
+   <eventaddhandlercall>mw_AddHandlerForThisEvent</eventaddhandlercall>
+   <eventrestorehandlercall>mw_RestoreHandlerForThisEvent</eventrestorehandlercall>
+   <baseratetrigger>Operating system timer</baseratetrigger>
+   <baseratepriority>14</baseratepriority>
+   <selectfcn>matlabshared.freertos.internal.onFreeRTOSSelect</selectfcn>
+</productinfo>

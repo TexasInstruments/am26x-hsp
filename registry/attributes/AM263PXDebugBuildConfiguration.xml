@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<productinfo version="3.0">
+  <name>AM263PX Debug Build Configuration</name>
+  <buildconfigurationinfo AssemblyFlags="" CPPCompileFlags="" CPPLinkFlags="" CompileFlags="" LinkFlags="">
+    <Defines>XCP_CUSTOM_PLATFORM</Defines>
+    <Defines>XCP_TIMESTAMP_BASED_ON_SIMULATION_TIME</Defines>
+    <IncludePaths>$(TARGET_ROOT)/include</IncludePaths>
+    <IncludePaths>$(MATLAB_ROOT)/toolbox/coder/rtiostream/src</IncludePaths>
+    <IncludePaths>$(MATLAB_ROOT)/toolbox/coder/xcp/src/target/ext_mode/include/</IncludePaths>
+    <IncludePaths>$(MATLAB_ROOT)/toolbox/coder/xcp/src/target/ext_mode/src/</IncludePaths>
+    <IncludePaths>$(MATLAB_ROOT)/toolbox/coder/xcp/src/target/server/common/</IncludePaths>
+    <IncludePaths>$(MATLAB_ROOT)/toolbox/coder/xcp/src/target/server/include</IncludePaths>
+    <IncludePaths>$(MATLAB_ROOT)/toolbox/coder/xcp/src/target/server/platform/include</IncludePaths>
+    <IncludePaths>$(MATLAB_ROOT)/toolbox/coder/xcp/src/target/server/platform/default</IncludePaths>
+    <IncludePaths>$(MATLAB_ROOT)/toolbox/coder/xcp/src/target/server/transport/include</IncludePaths>
+    <IncludePaths>$(MATLAB_ROOT)/toolbox/coder/xcp/src/target/server/transport/src</IncludePaths>
+    <IncludePaths>$(MCUSDKINSTALLDIR)/source/</IncludePaths>
+    <IncludePaths>$(MCUSDKINSTALLDIR)/source/drivers</IncludePaths>
+    <IncludePaths>$(MCUSDKINSTALLDIR)/source/board</IncludePaths>
+    <IncludePaths>$(MCUSDKINSTALLDIR)/source/kernel/freertos/FreeRTOS-Kernel/include/</IncludePaths>
+    <IncludePaths>$(MCUSDKINSTALLDIR)/source/kernel/freertos/portable/TI_ARM_CLANG/ARM_CR5F</IncludePaths>
+    <IncludePaths>$(MCUSDKINSTALLDIR)/source/kernel/freertos/config/am64x/r5f/</IncludePaths>
+    <Name>AM263PX Debug Build Configuration</Name>
+    <SourceFiles>$(TARGET_ROOT)/src/am263px_tick.c</SourceFiles>
+    <SourceFiles>$(TARGET_ROOT)/src/am263px_multitasking.c</SourceFiles>
+    <SourceFiles>$(TARGET_ROOT)/src/am263px_init.c</SourceFiles>
+    <SupportedOperatingSystems>all</SupportedOperatingSystems>
+    <SupportedToolchains>all</SupportedToolchains>
+  </buildconfigurationinfo>
+</productinfo>

@@ -1,0 +1,2 @@
+function addXCPSupport(hObj)
+end

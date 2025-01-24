@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<productinfo version="3.0">
+  <name>XCP on Serial</name>
+  <buildconfigurationinfo AssemblyFlags="" CPPCompileFlags="" CPPLinkFlags="" CompileFlags="" LinkFlags="">
+    <Name>XCP on Serial</Name>
+    <SourceFiles>$(TARGET_ROOT)/src/xcp_platform_custom.c</SourceFiles>
+    <SourceFiles>$(TARGET_ROOT)/src/rtiostream_serial.c</SourceFiles>
+    <SupportedOperatingSystems>all</SupportedOperatingSystems>
+    <SupportedToolchains>all</SupportedToolchains>
+  </buildconfigurationinfo>
+</productinfo>
