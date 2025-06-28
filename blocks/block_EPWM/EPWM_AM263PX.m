@@ -1322,7 +1322,137 @@ classdef EPWM_AM263PX < matlab.System & coder.ExternalDependency
          %DCB High Combinational Trip 15 Input
          DCBHigh_CombTrip15_Input (1,1) logical = false;
 
-        
+         %Diode Emulation
+         
+         %Enable DE Mode
+         Enable_DE_Mode (1,1) logical = false;
+         %Select DE Mode
+         DE_Mode = 'CBC Mode';
+         %Set DE Mode Reentry Delay
+         DE_Mode_Delay = 0;
+
+         %DECOMPSEL
+
+         %TRIPH
+         TRIPH = 'Trip source is Input XBAR out0 signal';
+         %TRIPL
+         TRIPL = 'Trip source is Input XBAR out0 signal';
+
+         %DEACTCTL
+
+         %Trip for Channel A
+         TRIP_ChannelA = 'TRIPL';
+         %PWMA Signal in DE Mode
+         PWMA_Signal_DE_Mode = 'Synchronized version of TRIP signal';
+         %Trip for Channel B
+         TRIP_ChannelB = 'TRIPL';
+         %PWMB Signal in DE Mode
+         PWMB_Signal_DE_Mode = 'Synchronized version of TRIP signal';
+         %Bypass DE PWM Generation Loic
+         Bypss_DEPWM_Generation (1,1) logical = false;
+
+         %Force set DEACTIVE flag
+         Force_DEACTIVE (1,1) logical = false;
+         %Enable Trip Monitor Mode
+         Enable_Trip_Monitor_Mode (1,1) logical = false;
+         %DE Monitor Mode Threshold
+         DE_Monitor_Mode_Threshold = 0;
+
+         %DEMONSTEP
+
+         %Decrement Step Size
+         Decrement_step_size = 0;
+         %Increment Step Size
+         Increment_step_size = 0;
+
+         %Minimum Deadband Logic
+
+         %Enable MDL Block A
+         Enable_MDLA (1,1) logical = false;
+         %Select reference signal MDLA
+         Ref_signal_MDLA = 'DEPWMA';
+         %Invert Reference Signal for Block A
+         Invert_Ref_signal_BlockA = 'No inversion on the selected reference signal';
+         %Set delay on PWMA
+         Delay_PWMA = 0;
+         %Select blocking signal on PWMA
+         Blocking_signal_PWMA = 'BLOCKA as blocking signal on PWMA';
+         %Blocking signal AND/OR with PWMA
+         Blocking_signal_AND_OR_PWMA = 'Blocking signal is inverted and ANDed with PWMA';
+
+         %Enable MDL Block B
+         Enable_MDLB (1,1) logical = false;
+         %Select reference signal MDLB
+         Ref_signal_MDLB = 'DEPWMB';
+         %Invert Reference Signal for Block B
+         Invert_Ref_signal_BlockB = 'No inversion on the selected reference signal';
+         %Set delay on PWMB
+         Delay_PWMB = 0;
+         %Select blocking signal on PWMB
+         Blocking_signal_PWMB = 'BLOCKB as blocking signal on PWMB';
+         %Blocking signal AND/OR with PWMB
+         Blocking_signal_AND_OR_PWMB = 'Blocking signal is inverted and ANDed with PWMB';
+
+         %ICL
+
+         %Enable ICL BlockA
+         Enable_ICL_BlockA (1,1) logical = false;
+         %Select IN3
+         Select_IN3_BlockA = 'EPWM_ICL_IN3_SRC_ICLXBAR_OUT0';
+         %Block A: IN3=0 IN2=0 IN1=0
+         BlockA_IN30_IN20_IN10 = 'Force 0';
+         %Block A: IN3=0 IN2=0 IN1=1
+         BlockA_IN30_IN20_IN11 = 'Force 0';
+         %Block A: IN3=0 IN2=1 IN1=0
+         BlockA_IN30_IN21_IN10 = 'Force 0';
+         %Block A: IN3=0 IN2=1 IN1=1
+         BlockA_IN30_IN21_IN11 = 'Force 0';
+         %Block A: IN3=1 IN2=0 IN1=0
+         BlockA_IN31_IN20_IN10 = 'Force 0';
+         %Block A: IN3=1 IN2=0 IN1=1
+         BlockA_IN31_IN20_IN11 = 'Force 0';
+         %Block A: IN3=1 IN2=1 IN1=0
+         BlockA_IN31_IN21_IN10 = 'Force 0';
+         %Block A: IN3=1 IN2=1 IN1=1
+         BlockA_IN31_IN21_IN11 = 'Force 0';
+
+         %Enable ICL BlockB
+         Enable_ICL_BlockB (1,1) logical = false;
+         %Select IN3
+         Select_IN3_BlockB = 'EPWM_ICL_IN3_SRC_ICLXBAR_OUT0';
+         %Block B: IN3=0 IN2=0 IN1=0
+         BlockB_IN30_IN20_IN10 = 'Force 0';
+         %Block B: IN3=0 IN2=0 IN1=1
+         BlockB_IN30_IN20_IN11 = 'Force 0';
+         %Block B: IN3=0 IN2=1 IN1=0
+         BlockB_IN30_IN21_IN10 = 'Force 0';
+         %Block B: IN3=0 IN2=1 IN1=1
+         BlockB_IN30_IN21_IN11 = 'Force 0';
+         %Block B: IN3=1 IN2=0 IN1=0
+         BlockB_IN31_IN20_IN10 = 'Force 0';
+         %Block B: IN3=1 IN2=0 IN1=1
+         BlockB_IN31_IN20_IN11 = 'Force 0';
+         %Block B: IN3=1 IN2=1 IN1=0
+         BlockB_IN31_IN21_IN10 = 'Force 0';
+         %Block B: IN3=1 IN2=1 IN1=1
+         BlockB_IN31_IN21_IN11 = 'Force 0';
+
+         %Global Load
+
+         %Enable Global Shadow to Active Load
+         Enable_Global_Shadow_Active_Load (1,1) logical = false;
+         %Global Load Pulse Section
+         Global_Load_Pulse_Section = 'Load when counter is equal to zero';
+         %Global Load Strobe Period
+         Global_Load_Strobe_Period = 'Counter is disabled';
+         %Enable One Shot Mode
+         Enable_OneShot_Mode (1,1) logical = false;
+         %Enable Reload Event in One Shot Mode
+         Enable_Reload_OneShot_Mode (1,1) logical = false;
+         %Force Load Event
+         Force_Load_Event (1,1) logical = false;
+         %Global PWM Load Link
+         Global_PWM_Load_Link = 'Disable Linking';
     end
 
     properties(Constant,Hidden)
@@ -1538,6 +1668,43 @@ classdef EPWM_AM263PX < matlab.System & coder.ExternalDependency
         Load_ModeSet = matlab.system.StringSet({'Load Once', 'Load multiple times'});
         Shadow_LevelSet = matlab.system.StringSet({'Shadow level zero', 'Shadow level one', 'Shadow level two', 'Shadow level three'});
         Shadow_register_load_onceSet = matlab.system.StringSet({'Do not load any shadow register set', 'Load shadow register set 1', 'Load shadow register set 2', 'Load shadow register set 3'});  
+        DE_ModeSet = matlab.system.StringSet({'CBC Mode', 'OST Mode'});
+        TRIPHSet = matlab.system.StringSet({'Trip source is Input XBAR out0 signal', 'Trip source is Input XBAR out1 signal', 'Trip source is Input XBAR out2 signal', 'Trip source is Input XBAR out3 signal', 'Trip source is Input XBAR out4 signal', 'Trip source is Input XBAR out5 signal', 'Trip source is Input XBAR out6 signal', 'Trip source is Input XBAR out7 signal', 'Trip source is Input XBAR out8 signal', 'Trip source is Input XBAR out9 signal', 'Trip source is Input XBAR out10 signal', 'Trip source is Input XBAR out11 signal', 'Trip source is Input XBAR out12 signal', 'Trip source is Input XBAR out13 signal', 'Trip source is Input XBAR out14 signal', 'Trip source is Input XBAR out15 signal', 'Trip source is Input XBAR out16 signal', 'Trip source is Input XBAR out17 signal', 'Trip source is Input XBAR out18 signal', 'Trip source is Input XBAR out19 signal', 'Trip source is Input XBAR out20 signal', 'Trip source is Input XBAR out21 signal', 'Trip source is Input XBAR out22 signal', 'Trip source is Input XBAR out23 signal', 'Trip source is Input XBAR out24 signal', 'Trip source is Input XBAR out25 signal', 'Trip source is Input XBAR out26 signal', 'Trip source is Input XBAR out27 signal', 'Trip source is Input XBAR out28 signal', 'Trip source is Input XBAR out29 signal', 'Trip source is Input XBAR out30 signal', 'Trip source is Input XBAR out31 signal', 'Trip source is CMPSSA0 signal', 'Trip source is CMPSSA1 signal', 'Trip source is CMPSSA2 signal', 'Trip source is CMPSSA3 signal', 'Trip source is CMPSSA4 signal', 'Trip source is CMPSSA5 signal', 'Trip sorce is CMPSSA6 signal', 'Trip source is CMPSSA7 signal', 'Trip source is CMPSSA8 signal', 'Trip source is CMPSSA9 signal', 'Trip source is CMPSSB0 signal', 'Trip source is CMPSSB1 signal', 'Trip source is CMPSSB2 signal', 'Trip source is CMPSSB3 signal', 'Trip source is CMPSSB4 signal', 'Trip source is CMPSSB5 signal', 'Trip sorce is CMPSSB6 signal', 'Trip source is CMPSSB7 signal', 'Trip source is CMPSSB8 signal', 'Trip source is CMPSSB9 signal'});
+        TRIPLSet = matlab.system.StringSet({'Trip source is Input XBAR out0 signal', 'Trip source is Input XBAR out1 signal', 'Trip source is Input XBAR out2 signal', 'Trip source is Input XBAR out3 signal', 'Trip source is Input XBAR out4 signal', 'Trip source is Input XBAR out5 signal', 'Trip source is Input XBAR out6 signal', 'Trip source is Input XBAR out7 signal', 'Trip source is Input XBAR out8 signal', 'Trip source is Input XBAR out9 signal', 'Trip source is Input XBAR out10 signal', 'Trip source is Input XBAR out11 signal', 'Trip source is Input XBAR out12 signal', 'Trip source is Input XBAR out13 signal', 'Trip source is Input XBAR out14 signal', 'Trip source is Input XBAR out15 signal', 'Trip source is Input XBAR out16 signal', 'Trip source is Input XBAR out17 signal', 'Trip source is Input XBAR out18 signal', 'Trip source is Input XBAR out19 signal', 'Trip source is Input XBAR out20 signal', 'Trip source is Input XBAR out21 signal', 'Trip source is Input XBAR out22 signal', 'Trip source is Input XBAR out23 signal', 'Trip source is Input XBAR out24 signal', 'Trip source is Input XBAR out25 signal', 'Trip source is Input XBAR out26 signal', 'Trip source is Input XBAR out27 signal', 'Trip source is Input XBAR out28 signal', 'Trip source is Input XBAR out29 signal', 'Trip source is Input XBAR out30 signal', 'Trip source is Input XBAR out31 signal', 'Trip source is CMPSSA0 signal', 'Trip source is CMPSSA1 signal', 'Trip source is CMPSSA2 signal', 'Trip source is CMPSSA3 signal', 'Trip source is CMPSSA4 signal', 'Trip source is CMPSSA5 signal', 'Trip sorce is CMPSSA6 signal', 'Trip source is CMPSSA7 signal', 'Trip source is CMPSSA8 signal', 'Trip source is CMPSSA9 signal', 'Trip source is CMPSSB0 signal', 'Trip source is CMPSSB1 signal', 'Trip source is CMPSSB2 signal', 'Trip source is CMPSSB3 signal', 'Trip source is CMPSSB4 signal', 'Trip source is CMPSSB5 signal', 'Trip sorce is CMPSSB6 signal', 'Trip source is CMPSSB7 signal', 'Trip source is CMPSSB8 signal', 'Trip source is CMPSSB9 signal'});
+        TRIP_ChannelASet = matlab.system.StringSet({'TRIPL', 'TRIPH'});
+        PWMA_Signal_DE_ModeSet = matlab.system.StringSet({'Synchronized version of TRIP signal', 'Synchronized and inverted version of TRIP signal', 'Constant LOW signal', 'Constant HIGH signal'});
+        TRIP_ChannelBSet = matlab.system.StringSet({'TRIPL', 'TRIPH'});
+        PWMB_Signal_DE_ModeSet = matlab.system.StringSet({'Synchronized version of TRIP signal', 'Synchronized and inverted version of TRIP signal', 'Constant LOW signal', 'Constant HIGH signal'});
+        Ref_signal_MDLASet = matlab.system.StringSet({'DEPWMA', 'MDLXBAR_OUT1', 'MDLXBAR_OUT2', 'MDLXBAR_OUT3', 'MDLXBAR_OUT4', 'MDLXBAR_OUT5', 'MDLXBAR_OUT6', 'MDLXBAR_OUT7', 'MDLXBAR_OUT8', 'MDLXBAR_OUT9', 'MDLXBAR_OUT10', 'MDLXBAR_OUT11', 'MDLXBAR_OUT12', 'MDLXBAR_OUT13', 'MDLXBAR_OUT14', 'MDLXBAR_OUT15'});
+        Invert_Ref_signal_BlockASet = matlab.system.StringSet({'No inversion on the selected reference signal', 'Invert the selected reference signal'});
+        Blocking_signal_PWMASet = matlab.system.StringSet({'BLOCKA as blocking signal on PWMA', 'BLOCKB as blocking signal on PWMA'});
+        Blocking_signal_AND_OR_PWMASet = matlab.system.StringSet({'Blocking signal is inverted and ANDed with PWMA', 'Blocking signal is ORed with PWMA'});
+        Ref_signal_MDLBSet = matlab.system.StringSet({'DEPWMB', 'MDLXBAR_OUT1', 'MDLXBAR_OUT2', 'MDLXBAR_OUT3', 'MDLXBAR_OUT4', 'MDLXBAR_OUT5', 'MDLXBAR_OUT6', 'MDLXBAR_OUT7', 'MDLXBAR_OUT8', 'MDLXBAR_OUT9', 'MDLXBAR_OUT10', 'MDLXBAR_OUT11', 'MDLXBAR_OUT12', 'MDLXBAR_OUT13', 'MDLXBAR_OUT14', 'MDLXBAR_OUT15'});
+        Invert_Ref_signal_BlockBSet = matlab.system.StringSet({'No inversion on the selected reference signal', 'Invert the selected reference signal'});
+        Blocking_signal_PWMBSet = matlab.system.StringSet({'BLOCKB as blocking signal on PWMB', 'BLOCKA as blocking signal on PWMB'});
+        Blocking_signal_AND_OR_PWMBSet = matlab.system.StringSet({'Blocking signal is inverted and ANDed with PWMB', 'Blocking signal is ORed with PWMB'});
+        Select_IN3_BlockASet = matlab.system.StringSet({'EPWM_ICL_IN3_SRC_ICLXBAR_OUT0', 'EPWM_ICL_IN3_SRC_ICLXBAR_OUT1', 'EPWM_ICL_IN3_SRC_ICLXBAR_OUT2', 'EPWM_ICL_IN3_SRC_ICLXBAR_OUT3', 'EPWM_ICL_IN3_SRC_ICLXBAR_OUT4', 'EPWM_ICL_IN3_SRC_ICLXBAR_OUT5', 'EPWM_ICL_IN3_SRC_ICLXBAR_OUT6', 'EPWM_ICL_IN3_SRC_ICLXBAR_OUT7', 'EPWM_ICL_IN3_SRC_ICLXBAR_OUT8', 'EPWM_ICL_IN3_SRC_ICLXBAR_OUT9', 'EPWM_ICL_IN3_SRC_ICLXBAR_OUT10', 'EPWM_ICL_IN3_SRC_ICLXBAR_OUT11', 'EPWM_ICL_IN3_SRC_ICLXBAR_OUT12', 'EPWM_ICL_IN3_SRC_ICLXBAR_OUT13', 'EPWM_ICL_IN3_SRC_ICLXBAR_OUT14', 'EPWM_ICL_IN3_SRC_ICLXBAR_OUT15'});
+        BlockA_IN30_IN20_IN10Set = matlab.system.StringSet({'Force 0', 'Force 1'});
+        BlockA_IN30_IN20_IN11Set = matlab.system.StringSet({'Force 0', 'Force 1'});
+        BlockA_IN30_IN21_IN10Set = matlab.system.StringSet({'Force 0', 'Force 1'});
+        BlockA_IN30_IN21_IN11Set = matlab.system.StringSet({'Force 0', 'Force 1'});
+        BlockA_IN31_IN20_IN10Set = matlab.system.StringSet({'Force 0', 'Force 1'});
+        BlockA_IN31_IN20_IN11Set = matlab.system.StringSet({'Force 0', 'Force 1'});
+        BlockA_IN31_IN21_IN10Set = matlab.system.StringSet({'Force 0', 'Force 1'});
+        BlockA_IN31_IN21_IN11Set = matlab.system.StringSet({'Force 0', 'Force 1'});
+        Select_IN3_BlockBSet = matlab.system.StringSet({'EPWM_ICL_IN3_SRC_ICLXBAR_OUT0', 'EPWM_ICL_IN3_SRC_ICLXBAR_OUT1', 'EPWM_ICL_IN3_SRC_ICLXBAR_OUT2', 'EPWM_ICL_IN3_SRC_ICLXBAR_OUT3', 'EPWM_ICL_IN3_SRC_ICLXBAR_OUT4', 'EPWM_ICL_IN3_SRC_ICLXBAR_OUT5', 'EPWM_ICL_IN3_SRC_ICLXBAR_OUT6', 'EPWM_ICL_IN3_SRC_ICLXBAR_OUT7', 'EPWM_ICL_IN3_SRC_ICLXBAR_OUT8', 'EPWM_ICL_IN3_SRC_ICLXBAR_OUT9', 'EPWM_ICL_IN3_SRC_ICLXBAR_OUT10', 'EPWM_ICL_IN3_SRC_ICLXBAR_OUT11', 'EPWM_ICL_IN3_SRC_ICLXBAR_OUT12', 'EPWM_ICL_IN3_SRC_ICLXBAR_OUT13', 'EPWM_ICL_IN3_SRC_ICLXBAR_OUT14', 'EPWM_ICL_IN3_SRC_ICLXBAR_OUT15'});
+        BlockB_IN30_IN20_IN10Set = matlab.system.StringSet({'Force 0', 'Force 1'});
+        BlockB_IN30_IN20_IN11Set = matlab.system.StringSet({'Force 0', 'Force 1'});
+        BlockB_IN30_IN21_IN10Set = matlab.system.StringSet({'Force 0', 'Force 1'});
+        BlockB_IN30_IN21_IN11Set = matlab.system.StringSet({'Force 0', 'Force 1'});
+        BlockB_IN31_IN20_IN10Set = matlab.system.StringSet({'Force 0', 'Force 1'});
+        BlockB_IN31_IN20_IN11Set = matlab.system.StringSet({'Force 0', 'Force 1'});
+        BlockB_IN31_IN21_IN10Set = matlab.system.StringSet({'Force 0', 'Force 1'});
+        BlockB_IN31_IN21_IN11Set = matlab.system.StringSet({'Force 0', 'Force 1'});
+        Global_Load_Pulse_SectionSet = matlab.system.StringSet({'Load when counter is equal to zero', 'Load when counter is equal to period', 'Load when counter is equal to zero or period', 'Load on sync event', 'Load on sync event or when counter is equal to zero', 'Load on sync event or when counter is equal to period', 'Load on sync event or when counter is equal to period or zero', 'Load when counter is equal to cmpc and cmpc is incrementing', 'Load when counter is equal to cmpc and cmpc is decrementing', 'Load when cntr is equal to cmpd and cmpd is incrementing', 'Load when counter is equal to cmpd and cmpd is decrementing', 'Load on global force'});
+        Global_Load_Strobe_PeriodSet = matlab.system.StringSet({'Counter is disabled', 'Generate strobe on 1st event', 'Generate strobe on 2nd event', 'Generate strobe on 3rd event', 'Generate strobe on 4th event', 'Generate strobe on 5th event', 'Generate strobe on 6th event', 'Generate strobe on 7th event'});
+        Global_PWM_Load_LinkSet = matlab.system.StringSet({'Disable Linking', 'Link current epwm with epwm0', 'Link current epwm with epwm1', 'Link current epwm with epwm2', 'Link current epwm with epwm3', 'Link current epwm with epwm4', 'Link current epwm with epwm5', 'Link current epwm with epwm6', 'Link current epwm with epwm7', 'Link current epwm with epwm8', 'Link current epwm with epwm9', 'Link current epwm with epwm10', 'Link current epwm with epwm11', 'Link current epwm with epwm12', 'Link current epwm with epwm13', 'Link current epwm with epwm14', 'Link current epwm with epwm15', 'Link current epwm with epwm16', 'Link current epwm with epwm17', 'Link current epwm with epwm18', 'Link current epwm with epwm19', 'Link current epwm with epwm20', 'Link current epwm with epwm21', 'Link current epwm with epwm22', 'Link current epwm with epwm23'});
+
     end
     
     
@@ -1756,6 +1923,42 @@ classdef EPWM_AM263PX < matlab.System & coder.ExternalDependency
         Load_ModeEnum;
         Shadow_LevelEnum;
         Shadow_register_load_onceEnum;
+        DE_ModeEnum;
+        TRIPHEnum;
+        TRIPLEnum;
+        TRIP_ChannelAEnum;
+        PWMA_Signal_DE_ModeEnum;
+        TRIP_ChannelBEnum;
+        PWMB_Signal_DE_ModeEnum;
+        Ref_signal_MDLAEnum;
+        Invert_Ref_signal_BlockAEnum;
+        Blocking_signal_PWMAEnum;
+        Blocking_signal_AND_OR_PWMAEnum;
+        Ref_signal_MDLBEnum;
+        Invert_Ref_signal_BlockBEnum;
+        Blocking_signal_PWMBEnum;
+        Blocking_signal_AND_OR_PWMBEnum;
+        Select_IN3_BlockAEnum;
+        BlockA_IN30_IN20_IN10Enum;
+        BlockA_IN30_IN20_IN11Enum;
+        BlockA_IN30_IN21_IN10Enum;
+        BlockA_IN30_IN21_IN11Enum;
+        BlockA_IN31_IN20_IN10Enum;
+        BlockA_IN31_IN20_IN11Enum;
+        BlockA_IN31_IN21_IN10Enum;
+        BlockA_IN31_IN21_IN11Enum;
+        Select_IN3_BlockBEnum;
+        BlockB_IN30_IN20_IN10Enum;
+        BlockB_IN30_IN20_IN11Enum;
+        BlockB_IN30_IN21_IN10Enum;
+        BlockB_IN30_IN21_IN11Enum;
+        BlockB_IN31_IN20_IN10Enum;
+        BlockB_IN31_IN20_IN11Enum;
+        BlockB_IN31_IN21_IN10Enum;
+        BlockB_IN31_IN21_IN11Enum;
+        Global_Load_Pulse_SectionEnum;
+        Global_Load_Strobe_PeriodEnum;
+        Global_PWM_Load_LinkEnum;
     end
 
     properties (Access = private)
@@ -1768,7 +1971,7 @@ classdef EPWM_AM263PX < matlab.System & coder.ExternalDependency
     
     methods
         % Constructor
-        function obj = EPWM(varargin)
+        function obj = EPWM_AM263PX(varargin)
             % Support name-value pair arguments when constructing the object.
             setProperties(obj,nargin,varargin{:});
         end
@@ -5637,6 +5840,762 @@ classdef EPWM_AM263PX < matlab.System & coder.ExternalDependency
             ret = uint16(0);
         end     
     end
+
+    function ret = get.DE_ModeEnum(obj)
+         if isequal(obj.DE_Mode, 'CBC Mode')
+             ret = uint16(0);
+         elseif isequal(obj.DE_Mode, 'OST Mode')
+             ret = uint16(1);
+         else
+             ret = uint16(0);
+         end
+    end
+
+    function ret = get.TRIPHEnum(obj)
+        if isequal(obj.TRIPH, 'Trip source is Input XBAR out0 signal')
+            ret = 0x01;
+        elseif isequal(obj.TRIPH, 'Trip source is Input XBAR out1 signal')
+            ret = 0x02;
+        elseif isequal(obj.TRIPH, 'Trip source is Input XBAR out2 signal')
+            ret = 0x03;
+        elseif isequal(obj.TRIPH, 'Trip source is Input XBAR out3 signal')
+            ret = 0x04;
+        elseif isequal(obj.TRIPH, 'Trip source is Input XBAR out4 signal')
+            ret = 0x05;
+        elseif isequal(obj.TRIPH, 'Trip source is Input XBAR out5 signal')
+            ret = 0x06;
+        elseif isequal(obj.TRIPH, 'Trip source is Input XBAR out6 signal')
+            ret = 0x07;
+        elseif isequal(obj.TRIPH, 'Trip source is Input XBAR out7 signal')
+            ret = 0x08;
+        elseif isequal(obj.TRIPH, 'Trip source is Input XBAR out8 signal')
+            ret = 0x09;
+        elseif isequal(obj.TRIPH, 'Trip source is Input XBAR out9 signal')
+            ret = 0x0A;
+        elseif isequal(obj.TRIPH, 'Trip source is Input XBAR out10 signal')
+            ret = 0x0B;
+        elseif isequal(obj.TRIPH, 'Trip source is Input XBAR out11 signal')
+            ret = 0x0C;
+        elseif isequal(obj.TRIPH, 'Trip source is Input XBAR out12 signal')
+            ret = 0x0D;
+        elseif isequal(obj.TRIPH, 'Trip source is Input XBAR out13 signal')
+            ret = 0x0E;
+        elseif isequal(obj.TRIPH, 'Trip source is Input XBAR out14 signal')
+            ret = 0x0F;
+        elseif isequal(obj.TRIPH, 'Trip source is Input XBAR out15 signal')
+            ret = 0x10;
+        elseif isequal(obj.TRIPH, 'Trip source is Input XBAR out16 signal')
+            ret = 0x11;
+        elseif isequal(obj.TRIPH, 'Trip source is Input XBAR out17 signal')
+            ret = 0x12;
+        elseif isequal(obj.TRIPH, 'Trip source is Input XBAR out18 signal')
+            ret = 0x13;
+        elseif isequal(obj.TRIPH, 'Trip source is Input XBAR out19 signal')
+            ret = 0x14;
+        elseif isequal(obj.TRIPH, 'Trip source is Input XBAR out20 signal')
+            ret = 0x15;
+        elseif isequal(obj.TRIPH, 'Trip source is Input XBAR out21 signal')
+            ret = 0x16;
+        elseif isequal(obj.TRIPH, 'Trip source is Input XBAR out22 signal')
+            ret = 0x17;
+        elseif isequal(obj.TRIPH, 'Trip source is Input XBAR out23 signal')
+            ret = 0x18;
+        elseif isequal(obj.TRIPH, 'Trip source is Input XBAR out24 signal')
+            ret = 0x19;
+        elseif isequal(obj.TRIPH, 'Trip source is Input XBAR out25 signal')
+            ret = 0x1A;
+        elseif isequal(obj.TRIPH, 'Trip source is Input XBAR out26 signal')
+            ret = 0x1B;
+        elseif isequal(obj.TRIPH, 'Trip source is Input XBAR out27 signal')
+            ret = 0x1C;
+        elseif isequal(obj.TRIPH, 'Trip source is Input XBAR out28 signal')
+            ret = 0x1D;
+        elseif isequal(obj.TRIPH, 'Trip source is Input XBAR out29 signal')
+            ret = 0x1E;
+        elseif isequal(obj.TRIPH, 'Trip source is Input XBAR out30 signal')
+            ret = 0x1F;
+        elseif isequal(obj.TRIPH, 'Trip source is Input XBAR out31 signal')
+            ret = 0x20;
+        elseif isequal(obj.TRIPH, 'Trip source is CMPSSA0 signal')
+            ret = 0x21;
+        elseif isequal(obj.TRIPH, 'Trip source is CMPSSA1 signal')
+            ret = 0x22;
+        elseif isequal(obj.TRIPH, 'Trip source is CMPSSA2 signal')
+            ret = 0x23;
+        elseif isequal(obj.TRIPH, 'Trip source is CMPSSA3 signal')
+            ret = 0x24;
+        elseif isequal(obj.TRIPH, 'Trip source is CMPSSA4 signal')
+            ret = 0x25;
+        elseif isequal(obj.TRIPH, 'Trip source is CMPSSA5 signal')
+            ret = 0x26;
+        elseif isequal(obj.TRIPH, 'Trip source is CMPSSA6 signal')
+            ret = 0x27;
+        elseif isequal(obj.TRIPH, 'Trip source is CMPSSA7 signal')
+            ret = 0x28;
+        elseif isequal(obj.TRIPH, 'Trip source is CMPSSA8 signal')
+            ret = 0x29;
+        elseif isequal(obj.TRIPH, 'Trip source is CMPSSA9 signal')
+            ret = 0x2A;
+        elseif isequal(obj.TRIPH, 'Trip source is CMPSSB0 signal')
+            ret = 0x31;
+        elseif isequal(obj.TRIPH, 'Trip source is CMPSSB1 signal')
+            ret = 0x32;
+        elseif isequal(obj.TRIPH, 'Trip source is CMPSSB2 signal')
+            ret = 0x33;
+        elseif isequal(obj.TRIPH, 'Trip source is CMPSSB3 signal')
+            ret = 0x34;
+        elseif isequal(obj.TRIPH, 'Trip source is CMPSSB4 signal')
+            ret = 0x35;
+        elseif isequal(obj.TRIPH, 'Trip source is CMPSSB5 signal')
+            ret = 0x36;
+        elseif isequal(obj.TRIPH, 'Trip source is CMPSSB6 signal')
+            ret = 0x37;
+        elseif isequal(obj.TRIPH, 'Trip source is CMPSSB7 signal')
+            ret = 0x38;
+        elseif isequal(obj.TRIPH, 'Trip source is CMPSSB8 signal')
+            ret = 0x39;
+        elseif isequal(obj.TRIPH, 'Trip source is CMPSSB9 signal')
+            ret = 0x3A;
+        end
+    end
+
+    function ret = get.TRIPLEnum(obj)
+        if isequal(obj.TRIPL, 'Trip source is Input XBAR out0 signal')
+            ret = 0x01;
+        elseif isequal(obj.TRIPL, 'Trip source is Input XBAR out1 signal')
+            ret = 0x02;
+        elseif isequal(obj.TRIPL, 'Trip source is Input XBAR out2 signal')
+            ret = 0x03;
+        elseif isequal(obj.TRIPL, 'Trip source is Input XBAR out3 signal')
+            ret = 0x04;
+        elseif isequal(obj.TRIPL, 'Trip source is Input XBAR out4 signal')
+            ret = 0x05;
+        elseif isequal(obj.TRIPL, 'Trip source is Input XBAR out5 signal')
+            ret = 0x06;
+        elseif isequal(obj.TRIPL, 'Trip source is Input XBAR out6 signal')
+            ret = 0x07;
+        elseif isequal(obj.TRIPL, 'Trip source is Input XBAR out7 signal')
+            ret = 0x08;
+        elseif isequal(obj.TRIPL, 'Trip source is Input XBAR out8 signal')
+            ret = 0x09;
+        elseif isequal(obj.TRIPL, 'Trip source is Input XBAR out9 signal')
+            ret = 0x0A;
+        elseif isequal(obj.TRIPL, 'Trip source is Input XBAR out10 signal')
+            ret = 0x0B;
+        elseif isequal(obj.TRIPL, 'Trip source is Input XBAR out11 signal')
+            ret = 0x0C;
+        elseif isequal(obj.TRIPL, 'Trip source is Input XBAR out12 signal')
+            ret = 0x0D;
+        elseif isequal(obj.TRIPL, 'Trip source is Input XBAR out13 signal')
+            ret = 0x0E;
+        elseif isequal(obj.TRIPL, 'Trip source is Input XBAR out14 signal')
+            ret = 0x0F;
+        elseif isequal(obj.TRIPL, 'Trip source is Input XBAR out15 signal')
+            ret = 0x10;
+        elseif isequal(obj.TRIPL, 'Trip source is Input XBAR out16 signal')
+            ret = 0x11;
+        elseif isequal(obj.TRIPL, 'Trip source is Input XBAR out17 signal')
+            ret = 0x12;
+        elseif isequal(obj.TRIPL, 'Trip source is Input XBAR out18 signal')
+            ret = 0x13;
+        elseif isequal(obj.TRIPL, 'Trip source is Input XBAR out19 signal')
+            ret = 0x14;
+        elseif isequal(obj.TRIPL, 'Trip source is Input XBAR out20 signal')
+            ret = 0x15;
+        elseif isequal(obj.TRIPL, 'Trip source is Input XBAR out21 signal')
+            ret = 0x16;
+        elseif isequal(obj.TRIPL, 'Trip source is Input XBAR out22 signal')
+            ret = 0x17;
+        elseif isequal(obj.TRIPL, 'Trip source is Input XBAR out23 signal')
+            ret = 0x18;
+        elseif isequal(obj.TRIPL, 'Trip source is Input XBAR out24 signal')
+            ret = 0x19;
+        elseif isequal(obj.TRIPL, 'Trip source is Input XBAR out25 signal')
+            ret = 0x1A;
+        elseif isequal(obj.TRIPL, 'Trip source is Input XBAR out26 signal')
+            ret = 0x1B;
+        elseif isequal(obj.TRIPL, 'Trip source is Input XBAR out27 signal')
+            ret = 0x1C;
+        elseif isequal(obj.TRIPL, 'Trip source is Input XBAR out28 signal')
+            ret = 0x1D;
+        elseif isequal(obj.TRIPL, 'Trip source is Input XBAR out29 signal')
+            ret = 0x1E;
+        elseif isequal(obj.TRIPL, 'Trip source is Input XBAR out30 signal')
+            ret = 0x1F;
+        elseif isequal(obj.TRIPL, 'Trip source is Input XBAR out31 signal')
+            ret = 0x20;
+        elseif isequal(obj.TRIPL, 'Trip source is CMPSSA0 signal')
+            ret = 0x21;
+        elseif isequal(obj.TRIPL, 'Trip source is CMPSSA1 signal')
+            ret = 0x22;
+        elseif isequal(obj.TRIPL, 'Trip source is CMPSSA2 signal')
+            ret = 0x23;
+        elseif isequal(obj.TRIPL, 'Trip source is CMPSSA3 signal')
+            ret = 0x24;
+        elseif isequal(obj.TRIPL, 'Trip source is CMPSSA4 signal')
+            ret = 0x25;
+        elseif isequal(obj.TRIPL, 'Trip source is CMPSSA5 signal')
+            ret = 0x26;
+        elseif isequal(obj.TRIPL, 'Trip source is CMPSSA6 signal')
+            ret = 0x27;
+        elseif isequal(obj.TRIPL, 'Trip source is CMPSSA7 signal')
+            ret = 0x28;
+        elseif isequal(obj.TRIPL, 'Trip source is CMPSSA8 signal')
+            ret = 0x29;
+        elseif isequal(obj.TRIPL, 'Trip source is CMPSSA9 signal')
+            ret = 0x2A;
+        elseif isequal(obj.TRIPL, 'Trip source is CMPSSB0 signal')
+            ret = 0x31;
+        elseif isequal(obj.TRIPL, 'Trip source is CMPSSB1 signal')
+            ret = 0x32;
+        elseif isequal(obj.TRIPL, 'Trip source is CMPSSB2 signal')
+            ret = 0x33;
+        elseif isequal(obj.TRIPL, 'Trip source is CMPSSB3 signal')
+            ret = 0x34;
+        elseif isequal(obj.TRIPL, 'Trip source is CMPSSB4 signal')
+            ret = 0x35;
+        elseif isequal(obj.TRIPL, 'Trip source is CMPSSB5 signal')
+            ret = 0x36;
+        elseif isequal(obj.TRIPL, 'Trip source is CMPSSB6 signal')
+            ret = 0x37;
+        elseif isequal(obj.TRIPL, 'Trip source is CMPSSB7 signal')
+            ret = 0x38;
+        elseif isequal(obj.TRIPL, 'Trip source is CMPSSB8 signal')
+            ret = 0x39;
+        elseif isequal(obj.TRIPL, 'Trip source is CMPSSB9 signal')
+            ret = 0x3A;
+        end
+    end
+
+    function ret = get.TRIP_ChannelAEnum(obj)
+        if isequal(obj.TRIP_ChannelA, 'TRIPL')
+            ret = 0x1;
+        elseif isequal(obj.TRIP_ChannelA, 'TRIPH')
+            ret = 0x0;
+        else
+            ret = 0x0;
+        end
+    end
+
+    function ret = get.PWMA_Signal_DE_ModeEnum(obj)
+        if isequal(obj.PWMA_Signal_DE_Mode, 'Synchronized version of TRIP signal')
+            ret = 0x00;
+        elseif isequal(obj.PWMA_Signal_DE_Mode, 'Synchronized and inverted version of TRIP signal')
+            ret = 0x01;
+        elseif isequal(obj.PWMA_Signal_DE_Mode, 'Constant LOW signal')
+            ret = 0x10;
+        elseif isequal(obj.PWMA_Signal_DE_Mode, 'Constant HIGH signal')
+            ret = 0x11;
+        else
+            ret = 0x00;
+        end
+    end
+
+    function ret = get.TRIP_ChannelBEnum(obj)
+        if isequal(obj.TRIP_ChannelB, 'TRIPL')
+            ret = 0x1;
+        elseif isequal(obj.TRIP_ChannelB, 'TRIPH')
+            ret = 0x0;
+        else
+            ret = 0x0;
+        end
+    end
+
+    function ret = get.PWMB_Signal_DE_ModeEnum(obj)
+        if isequal(obj.PWMB_Signal_DE_Mode, 'Synchronized version of TRIP signal')
+            ret = 0x00;
+        elseif isequal(obj.PWMB_Signal_DE_Mode, 'Synchronized and inverted version of TRIP signal')
+            ret = 0x01;
+        elseif isequal(obj.PWMB_Signal_DE_Mode, 'Constant LOW signal')
+            ret = 0x10;
+        elseif isequal(obj.PWMB_Signal_DE_Mode, 'Constant HIGH signal')
+            ret = 0x11;
+        else
+            ret = 0x00;
+        end
+    end    
+
+
+    function ret = get.Ref_signal_MDLAEnum(obj)
+        if isequal(obj.Ref_signal_MDLA, 'DEPWMA')
+            ret = uint32(0);
+        elseif isequal(obj.Ref_signal_MDLA, 'MDLXBAR_OUT1')
+            ret = uint32(1);
+        elseif isequal(obj.Ref_signal_MDLA, 'MDLXBAR_OUT2')
+            ret = uint32(2);
+        elseif isequal(obj.Ref_signal_MDLA, 'MDLXBAR_OUT3')
+            ret = uint32(3);
+        elseif isequal(obj.Ref_signal_MDLA, 'MDLXBAR_OUT4')
+            ret = uint32(4);
+        elseif isequal(obj.Ref_signal_MDLA, 'MDLXBAR_OUT5')
+            ret = uint32(5);
+        elseif isequal(obj.Ref_signal_MDLA, 'MDLXBAR_OUT6')
+            ret = uint32(6);
+        elseif isequal(obj.Ref_signal_MDLA, 'MDLXBAR_OUT7')
+            ret = uint32(7);
+        elseif isequal(obj.Ref_signal_MDLA, 'MDLXBAR_OUT8')
+            ret = uint32(8);
+        elseif isequal(obj.Ref_signal_MDLA, 'MDLXBAR_OUT9')
+            ret = uint32(9);
+        elseif isequal(obj.Ref_signal_MDLA, 'MDLXBAR_OUT10')
+            ret = uint32(10);
+        elseif isequal(obj.Ref_signal_MDLA, 'MDLXBAR_OUT11')
+            ret = uint32(11);
+        elseif isequal(obj.Ref_signal_MDLA, 'MDLXBAR_OUT12')
+            ret = uint32(12);
+        elseif isequal(obj.Ref_signal_MDLA, 'MDLXBAR_OUT13')
+            ret = uint32(13);
+        elseif isequal(obj.Ref_signal_MDLA, 'MDLXBAR_OUT14')
+            ret = uint32(14);
+        elseif isequal(obj.Ref_signal_MDLA, 'MDLXBAR_OUT15')
+            ret = uint32(15);
+        else
+            ret = uint32(0);
+        end
+    end
+
+    function ret = get.Invert_Ref_signal_BlockAEnum(obj)
+        if isequal(obj.Invert_Ref_signal_BlockA, 'No inversion on the selected reference signal')
+            ret = uint32(0);
+        elseif isequal(obj.Invert_Ref_signal_BlockA, 'Invert the selected reference signal')
+            ret = uint32(1);
+        else
+            ret = uint32(0);
+        end
+    end
+
+    function ret = get.Blocking_signal_PWMAEnum(obj)
+        if isequal(obj.Blocking_signal_PWMA, 'BLOCKA as blocking signal on PWMA')
+            ret = uint32(0);
+        elseif isequal(obj.Blocking_signal_PWMA, 'BLOCKB as blocking signal on PWMA')
+            ret = uint32(1);
+        else
+            ret = uint32(0);
+        end
+    end
+
+    function ret = get.Blocking_signal_AND_OR_PWMAEnum(obj)
+        if isequal(obj.Blocking_signal_AND_OR_PWMA, 'Blocking signal is inverted and ANDed with PWMA')
+            ret = uint32(0);
+        elseif isequal(obj.Blocking_signal_AND_OR_PWMA, 'Blocking signal is ORed with PWMA')
+            ret = uint32(1);
+        else
+            ret = uint32(0);
+        end
+    end
+
+
+    function ret = get.Ref_signal_MDLBEnum(obj)
+        if isequal(obj.Ref_signal_MDLB, 'DEPWMB')
+            ret = uint32(0);
+        elseif isequal(obj.Ref_signal_MDLB, 'MDLXBAR_OUT1')
+            ret = uint32(1);
+        elseif isequal(obj.Ref_signal_MDLB, 'MDLXBAR_OUT2')
+            ret = uint32(2);
+        elseif isequal(obj.Ref_signal_MDLB, 'MDLXBAR_OUT3')
+            ret = uint32(3);
+        elseif isequal(obj.Ref_signal_MDLB, 'MDLXBAR_OUT4')
+            ret = uint32(4);
+        elseif isequal(obj.Ref_signal_MDLB, 'MDLXBAR_OUT5')
+            ret = uint32(5);
+        elseif isequal(obj.Ref_signal_MDLB, 'MDLXBAR_OUT6')
+            ret = uint32(6);
+        elseif isequal(obj.Ref_signal_MDLB, 'MDLXBAR_OUT7')
+            ret = uint32(7);
+        elseif isequal(obj.Ref_signal_MDLB, 'MDLXBAR_OUT8')
+            ret = uint32(8);
+        elseif isequal(obj.Ref_signal_MDLB, 'MDLXBAR_OUT9')
+            ret = uint32(9);
+        elseif isequal(obj.Ref_signal_MDLB, 'MDLXBAR_OUT10')
+            ret = uint32(10);
+        elseif isequal(obj.Ref_signal_MDLB, 'MDLXBAR_OUT11')
+            ret = uint32(11);
+        elseif isequal(obj.Ref_signal_MDLB, 'MDLXBAR_OUT12')
+            ret = uint32(12);
+        elseif isequal(obj.Ref_signal_MDLB, 'MDLXBAR_OUT13')
+            ret = uint32(13);
+        elseif isequal(obj.Ref_signal_MDLB, 'MDLXBAR_OUT14')
+            ret = uint32(14);
+        elseif isequal(obj.Ref_signal_MDLB, 'MDLXBAR_OUT15')
+            ret = uint32(15);
+        else
+            ret = uint32(0);
+        end
+    end
+
+    function ret = get.Invert_Ref_signal_BlockBEnum(obj)
+        if isequal(obj.Invert_Ref_signal_BlockB, 'No inversion on the selected reference signal')
+            ret = uint32(0);
+        elseif isequal(obj.Invert_Ref_signal_BlockB, 'Invert the selected reference signal')
+            ret = uint32(1);
+        else
+            ret = uint32(0);
+        end
+    end
+
+    function ret = get.Blocking_signal_PWMBEnum(obj)
+        if isequal(obj.Blocking_signal_PWMB, 'BLOCKA as blocking signal on PWMB')
+            ret = uint32(1);
+        elseif isequal(obj.Blocking_signal_PWMB, 'BLOCKB as blocking signal on PWMB')
+            ret = uint32(0);
+        else
+            ret = uint32(0);
+        end
+    end
+
+    function ret = get.Blocking_signal_AND_OR_PWMBEnum(obj)
+        if isequal(obj.Blocking_signal_AND_OR_PWMB, 'Blocking signal is inverted and ANDed with PWMB')
+            ret = uint32(0);
+        elseif isequal(obj.Blocking_signal_AND_OR_PWMB, 'Blocking signal is ORed with PWMB')
+            ret = uint32(1);
+        else
+            ret = uint32(0);
+        end
+    end
+
+    function ret = get.Select_IN3_BlockAEnum(obj)
+        if isequal(obj.Select_IN3_BlockA, 'EPWM_ICL_IN3_SRC_ICLXBAR_OUT0')
+            ret = uint32(0);
+        elseif isequal(obj.Select_IN3_BlockA, 'EPWM_ICL_IN3_SRC_ICLXBAR_OUT1')
+            ret = uint32(1);
+        elseif isequal(obj.Select_IN3_BlockA, 'EPWM_ICL_IN3_SRC_ICLXBAR_OUT2')
+            ret = uint32(2);
+        elseif isequal(obj.Select_IN3_BlockA, 'EPWM_ICL_IN3_SRC_ICLXBAR_OUT3')
+            ret = uint32(3);
+        elseif isequal(obj.Select_IN3_BlockA, 'EPWM_ICL_IN3_SRC_ICLXBAR_OUT4')
+            ret = uint32(4);
+        elseif isequal(obj.Select_IN3_BlockA, 'EPWM_ICL_IN3_SRC_ICLXBAR_OUT5')
+            ret = uint32(5);
+        elseif isequal(obj.Select_IN3_BlockA, 'EPWM_ICL_IN3_SRC_ICLXBAR_OUT6')
+            ret = uint32(6);
+        elseif isequal(obj.Select_IN3_BlockA, 'EPWM_ICL_IN3_SRC_ICLXBAR_OUT7')
+            ret = uint32(7);
+        elseif isequal(obj.Select_IN3_BlockA, 'EPWM_ICL_IN3_SRC_ICLXBAR_OUT8')
+            ret = uint32(8);
+        elseif isequal(obj.Select_IN3_BlockA, 'EPWM_ICL_IN3_SRC_ICLXBAR_OUT9')
+            ret = uint32(9);
+        elseif isequal(obj.Select_IN3_BlockA, 'EPWM_ICL_IN3_SRC_ICLXBAR_OUT10')
+            ret = uint32(10);
+        elseif isequal(obj.Select_IN3_BlockA, 'EPWM_ICL_IN3_SRC_ICLXBAR_OUT11')
+            ret = uint32(11);
+        elseif isequal(obj.Select_IN3_BlockA, 'EPWM_ICL_IN3_SRC_ICLXBAR_OUT12')
+            ret = uint32(12);
+        elseif isequal(obj.Select_IN3_BlockA, 'EPWM_ICL_IN3_SRC_ICLXBAR_OUT13')
+            ret = uint32(13);
+        elseif isequal(obj.Select_IN3_BlockA, 'EPWM_ICL_IN3_SRC_ICLXBAR_OUT14')
+            ret = uint32(14);
+        elseif isequal(obj.Select_IN3_BlockA, 'EPWM_ICL_IN3_SRC_ICLXBAR_OUT15')
+            ret = uint32(15);
+        else
+            ret = uint32(0);
+        end
+    end
+
+    function ret = get.BlockA_IN30_IN20_IN10Enum(obj)
+        if isequal(obj.BlockA_IN30_IN20_IN10, 'Force 0')
+            ret = uint32(0);
+        elseif isequal(obj.BlockA_IN30_IN20_IN10, 'Force 1')
+            ret = uint32(1);
+        else
+            ret = uint32(0);
+        end
+    end
+
+    function ret = get.BlockA_IN30_IN20_IN11Enum(obj)
+        if isequal(obj.BlockA_IN30_IN20_IN11, 'Force 0')
+            ret = uint32(0);
+        elseif isequal(obj.BlockA_IN30_IN20_IN11, 'Force 1')
+            ret = uint32(1);
+        else
+            ret = uint32(0);
+        end
+    end
+
+    function ret = get.BlockA_IN30_IN21_IN10Enum(obj)
+        if isequal(obj.BlockA_IN30_IN21_IN10, 'Force 0')
+            ret = uint32(0);
+        elseif isequal(obj.BlockA_IN30_IN21_IN10, 'Force 1')
+            ret = uint32(1);
+        else
+            ret = uint32(0);
+        end
+    end
+
+    function ret = get.BlockA_IN30_IN21_IN11Enum(obj)
+        if isequal(obj.BlockA_IN30_IN21_IN11, 'Force 0')
+            ret = uint32(0);
+        elseif isequal(obj.BlockA_IN30_IN21_IN11, 'Force 1')
+            ret = uint32(1);
+        else
+            ret = uint32(0);
+        end
+    end
+
+    function ret = get.BlockA_IN31_IN20_IN10Enum(obj)
+        if isequal(obj.BlockA_IN31_IN20_IN10, 'Force 0')
+            ret = uint32(0);
+        elseif isequal(obj.BlockA_IN31_IN20_IN10, 'Force 1')
+            ret = uint32(1);
+        else
+            ret = uint32(0);
+        end
+    end
+
+    function ret = get.BlockA_IN31_IN20_IN11Enum(obj)
+        if isequal(obj.BlockA_IN31_IN20_IN11, 'Force 0')
+            ret = uint32(0);
+        elseif isequal(obj.BlockA_IN31_IN20_IN11, 'Force 1')
+            ret = uint32(1);
+        else
+            ret = uint32(0);
+        end
+    end
+
+    function ret = get.BlockA_IN31_IN21_IN10Enum(obj)
+        if isequal(obj.BlockA_IN31_IN21_IN10, 'Force 0')
+            ret = uint32(0);
+        elseif isequal(obj.BlockA_IN31_IN21_IN10, 'Force 1')
+            ret = uint32(1);
+        else
+            ret = uint32(0);
+        end
+    end
+
+    function ret = get.BlockA_IN31_IN21_IN11Enum(obj)
+        if isequal(obj.BlockA_IN31_IN21_IN11, 'Force 0')
+            ret = uint32(0);
+        elseif isequal(obj.BlockA_IN31_IN21_IN11, 'Force 1')
+            ret = uint32(1);
+        else
+            ret = uint32(0);
+        end
+    end
+
+    function ret = get.Select_IN3_BlockBEnum(obj)
+        if isequal(obj.Select_IN3_BlockB, 'EPWM_ICL_IN3_SRC_ICLXBAR_OUT0')
+            ret = uint32(0);
+        elseif isequal(obj.Select_IN3_BlockB, 'EPWM_ICL_IN3_SRC_ICLXBAR_OUT1')
+            ret = uint32(1);
+        elseif isequal(obj.Select_IN3_BlockB, 'EPWM_ICL_IN3_SRC_ICLXBAR_OUT2')
+            ret = uint32(2);
+        elseif isequal(obj.Select_IN3_BlockB, 'EPWM_ICL_IN3_SRC_ICLXBAR_OUT3')
+            ret = uint32(3);
+        elseif isequal(obj.Select_IN3_BlockB, 'EPWM_ICL_IN3_SRC_ICLXBAR_OUT4')
+            ret = uint32(4);
+        elseif isequal(obj.Select_IN3_BlockB, 'EPWM_ICL_IN3_SRC_ICLXBAR_OUT5')
+            ret = uint32(5);
+        elseif isequal(obj.Select_IN3_BlockB, 'EPWM_ICL_IN3_SRC_ICLXBAR_OUT6')
+            ret = uint32(6);
+        elseif isequal(obj.Select_IN3_BlockB, 'EPWM_ICL_IN3_SRC_ICLXBAR_OUT7')
+            ret = uint32(7);
+        elseif isequal(obj.Select_IN3_BlockB, 'EPWM_ICL_IN3_SRC_ICLXBAR_OUT8')
+            ret = uint32(8);
+        elseif isequal(obj.Select_IN3_BlockB, 'EPWM_ICL_IN3_SRC_ICLXBAR_OUT9')
+            ret = uint32(9);
+        elseif isequal(obj.Select_IN3_BlockB, 'EPWM_ICL_IN3_SRC_ICLXBAR_OUT10')
+            ret = uint32(10);
+        elseif isequal(obj.Select_IN3_BlockB, 'EPWM_ICL_IN3_SRC_ICLXBAR_OUT11')
+            ret = uint32(11);
+        elseif isequal(obj.Select_IN3_BlockB, 'EPWM_ICL_IN3_SRC_ICLXBAR_OUT12')
+            ret = uint32(12);
+        elseif isequal(obj.Select_IN3_BlockB, 'EPWM_ICL_IN3_SRC_ICLXBAR_OUT13')
+            ret = uint32(13);
+        elseif isequal(obj.Select_IN3_BlockB, 'EPWM_ICL_IN3_SRC_ICLXBAR_OUT14')
+            ret = uint32(14);
+        elseif isequal(obj.Select_IN3_BlockB, 'EPWM_ICL_IN3_SRC_ICLXBAR_OUT15')
+            ret = uint32(15);
+        else
+            ret = uint32(0);
+        end
+    end
+
+    function ret = get.BlockB_IN30_IN20_IN10Enum(obj)
+        if isequal(obj.BlockB_IN30_IN20_IN10, 'Force 0')
+            ret = uint32(0);
+        elseif isequal(obj.BlockB_IN30_IN20_IN10, 'Force 1')
+            ret = uint32(1);
+        else
+            ret = uint32(0);
+        end
+    end
+
+    function ret = get.BlockB_IN30_IN20_IN11Enum(obj)
+        if isequal(obj.BlockB_IN30_IN20_IN11, 'Force 0')
+            ret = uint32(0);
+        elseif isequal(obj.BlockB_IN30_IN20_IN11, 'Force 1')
+            ret = uint32(1);
+        else
+            ret = uint32(0);
+        end
+    end
+
+    function ret = get.BlockB_IN30_IN21_IN10Enum(obj)
+        if isequal(obj.BlockB_IN30_IN21_IN10, 'Force 0')
+            ret = uint32(0);
+        elseif isequal(obj.BlockB_IN30_IN21_IN10, 'Force 1')
+            ret = uint32(1);
+        else
+            ret = uint32(0);
+        end
+    end
+
+    function ret = get.BlockB_IN30_IN21_IN11Enum(obj)
+        if isequal(obj.BlockB_IN30_IN21_IN11, 'Force 0')
+            ret = uint32(0);
+        elseif isequal(obj.BlockB_IN30_IN21_IN11, 'Force 1')
+            ret = uint32(1);
+        else
+            ret = uint32(0);
+        end
+    end
+
+    function ret = get.BlockB_IN31_IN20_IN10Enum(obj)
+        if isequal(obj.BlockB_IN31_IN20_IN10, 'Force 0')
+            ret = uint32(0);
+        elseif isequal(obj.BlockB_IN31_IN20_IN10, 'Force 1')
+            ret = uint32(1);
+        else
+            ret = uint32(0);
+        end
+    end
+
+    function ret = get.BlockB_IN31_IN20_IN11Enum(obj)
+        if isequal(obj.BlockB_IN31_IN20_IN11, 'Force 0')
+            ret = uint32(0);
+        elseif isequal(obj.BlockB_IN31_IN20_IN11, 'Force 1')
+            ret = uint32(1);
+        else
+            ret = uint32(0);
+        end
+    end
+
+    function ret = get.BlockB_IN31_IN21_IN10Enum(obj)
+        if isequal(obj.BlockB_IN31_IN21_IN10, 'Force 0')
+            ret = uint32(0);
+        elseif isequal(obj.BlockB_IN31_IN21_IN10, 'Force 1')
+            ret = uint32(1);
+        else
+            ret = uint32(0);
+        end
+    end
+
+    function ret = get.BlockB_IN31_IN21_IN11Enum(obj)
+        if isequal(obj.BlockB_IN31_IN21_IN11, 'Force 0')
+            ret = uint32(0);
+        elseif isequal(obj.BlockB_IN31_IN21_IN11, 'Force 1')
+            ret = uint32(1);
+        else
+            ret = uint32(0);
+        end
+    end
+
+    function ret = get.Global_Load_Pulse_SectionEnum(obj)
+        if isequal(obj.Global_Load_Pulse_Section, 'Load when counter is equal to zero')
+            ret = 0x0;
+        elseif isequal(obj.Global_Load_Pulse_Section, 'Load when counter is equal to period')
+            ret = 0x1;
+        elseif isequal(obj.Global_Load_Pulse_Section, 'Load when counter is equal to zero or period')
+            ret = 0x2;
+        elseif isequal(obj.Global_Load_Pulse_Section, 'Load on sync event')
+            ret = 0x3;
+        elseif isequal(obj.Global_Load_Pulse_Section, 'Load on sync event or when counter is equal to zero')
+            ret = 0x4;
+        elseif isequal(obj.Global_Load_Pulse_Section, 'Load on sync event or when counter is equal to period')
+            ret = 0x5;
+        elseif isequal(obj.Global_Load_Pulse_Section, 'Load on sync event or when counter is equal to period or zero')
+            ret = 0x6;
+        elseif isequal(obj.Global_Load_Pulse_Section, 'Load when counter is equal to cmpc and cmpc is incrementing')
+            ret = 0x8;
+        elseif isequal(obj.Global_Load_Pulse_Section, 'Load when counter is equal to cmpc and cmpc is decrementing')
+            ret = 0x9;
+        elseif isequal(obj.Global_Load_Pulse_Section, 'Load when cntr is equal to cmpd and cmpd is incrementing')
+            ret = 0xA;
+        elseif isequal(obj.Global_Load_Pulse_Section, 'Load when counter is equal to cmpd and cmpd is decrementing')
+            ret = 0xB;
+        elseif isequal(obj.Global_Load_Pulse_Section, 'Load on global force')
+            ret = 0xF;
+        else
+            ret = 0x0;
+        end
+    end
+
+    function ret = get.Global_Load_Strobe_PeriodEnum(obj)
+        if isequal(obj.Global_Load_Strobe_Period, 'Counter is disabled')
+            ret = uint16(0);
+        elseif isequal(obj.Global_Load_Strobe_Period, 'Generate strobe on 1st event')
+            ret = uint16(1);
+        elseif isequal(obj.Global_Load_Strobe_Period, 'Generate strobe on 2nd event')
+            ret = uint16(2);
+        elseif isequal(obj.Global_Load_Strobe_Period, 'Generate strobe on 3rd event')
+            ret = uint16(3);
+        elseif isequal(obj.Global_Load_Strobe_Period, 'Generate strobe on 4th event')
+            ret = uint16(4);
+        elseif isequal(obj.Global_Load_Strobe_Period, 'Generate strobe on 5th event')
+            ret = uint16(5);
+        elseif isequal(obj.Global_Load_Strobe_Period, 'Generate strobe on 6th event')
+            ret = uint16(6);
+        elseif isequal(obj.Global_Load_Strobe_Period, 'Generate strobe on 7th event')
+            ret = uint16(7);
+        else
+            ret = uint16(0);
+        end
+    end
+
+    function ret = get.Global_PWM_Load_LinkEnum(obj)
+        if isequal(obj.Global_PWM_Load_Link, 'Disable Linking')
+           ret = uint16(30);
+        elseif isequal(obj.Global_PWM_Load_Link, 'Link current epwm with epwm0')
+           ret = uint16(0);
+        elseif isequal(obj.Global_PWM_Load_Link, 'Link current epwm with epwm1')
+           ret = uint16(1);
+        elseif isequal(obj.Global_PWM_Load_Link, 'Link current epwm with epwm2')
+           ret = uint16(2);
+        elseif isequal(obj.Global_PWM_Load_Link, 'Link current epwm with epwm3')
+           ret = uint16(3);
+        elseif isequal(obj.Global_PWM_Load_Link, 'Link current epwm with epwm4')
+           ret = uint16(4);
+        elseif isequal(obj.Global_PWM_Load_Link, 'Link current epwm with epwm5')
+           ret = uint16(5);
+        elseif isequal(obj.Global_PWM_Load_Link, 'Link current epwm with epwm6')
+           ret = uint16(6);
+        elseif isequal(obj.Global_PWM_Load_Link, 'Link current epwm with epwm7')
+           ret = uint16(7);
+        elseif isequal(obj.Global_PWM_Load_Link, 'Link current epwm with epwm8')
+           ret = uint16(8);
+        elseif isequal(obj.Global_PWM_Load_Link, 'Link current epwm with epwm9')
+           ret = uint16(9);
+        elseif isequal(obj.Global_PWM_Load_Link, 'Link current epwm with epwm10')
+           ret = uint16(10);
+        elseif isequal(obj.Global_PWM_Load_Link, 'Link current epwm with epwm11')
+           ret = uint16(11);
+        elseif isequal(obj.Global_PWM_Load_Link, 'Link current epwm with epwm12')
+           ret = uint16(12);
+        elseif isequal(obj.Global_PWM_Load_Link, 'Link current epwm with epwm13')
+           ret = uint16(13);
+        elseif isequal(obj.Global_PWM_Load_Link, 'Link current epwm with epwm14')
+           ret = uint16(14);
+        elseif isequal(obj.Global_PWM_Load_Link, 'Link current epwm with epwm15')
+           ret = uint16(15);
+        elseif isequal(obj.Global_PWM_Load_Link, 'Link current epwm with epwm16')
+           ret = uint16(16);
+        elseif isequal(obj.Global_PWM_Load_Link, 'Link current epwm with epwm17')
+           ret = uint16(17);
+        elseif isequal(obj.Global_PWM_Load_Link, 'Link current epwm with epwm18')
+           ret = uint16(18);
+        elseif isequal(obj.Global_PWM_Load_Link, 'Link current epwm with epwm19')
+           ret = uint16(19);
+        elseif isequal(obj.Global_PWM_Load_Link, 'Link current epwm with epwm20')
+           ret = uint16(20);
+        elseif isequal(obj.Global_PWM_Load_Link, 'Link current epwm with epwm21')
+           ret = uint16(21);
+        elseif isequal(obj.Global_PWM_Load_Link, 'Link current epwm with epwm22')
+           ret = uint16(22);
+        elseif isequal(obj.Global_PWM_Load_Link, 'Link current epwm with epwm23')
+           ret = uint16(23);
+        else
+            ret = uint16(0);
+        end
+    end
 end
 
      methods (Static, Access=protected)
@@ -5716,10 +6675,24 @@ end
                 'EPWMXA_tbctr_XCMP1_SHADOW2', 'EPWMXA_tbctr_XCMP2_SHADOW2', 'EPWMXA_tbctr_XCMP3_SHADOW2', 'EPWMXA_tbctr_XCMP4_SHADOW2', 'EPWMXA_tbctr_XCMP5_SHADOW2', 'EPWMXA_tbctr_XCMP6_SHADOW2', 'EPWMXA_tbctr_XCMP7_SHADOW2', 'EPWMXA_tbctr_XCMP8_SHADOW2', 'EPWMXB_tbctr_XCMP5_SHADOW2', 'EPWMXB_tbctr_XCMP6_SHADOW2', 'EPWMXB_tbctr_XCMP7_SHADOW2', 'EPWMXB_tbctr_XCMP8_SHADOW2', ...
                 'EPWMXA_tbctr_XCMP1_SHADOW3', 'EPWMXA_tbctr_XCMP2_SHADOW3', 'EPWMXA_tbctr_XCMP3_SHADOW3', 'EPWMXA_tbctr_XCMP4_SHADOW3', 'EPWMXA_tbctr_XCMP5_SHADOW3', 'EPWMXA_tbctr_XCMP6_SHADOW3', 'EPWMXA_tbctr_XCMP7_SHADOW3', 'EPWMXA_tbctr_XCMP8_SHADOW3', 'EPWMXB_tbctr_XCMP5_SHADOW3', 'EPWMXB_tbctr_XCMP6_SHADOW3', 'EPWMXB_tbctr_XCMP7_SHADOW3', 'EPWMXB_tbctr_XCMP8_SHADOW3', ...
                 'XMIN_Active', 'XMAX_Active', 'XMIN_Shadow1', 'XMAX_Shadow1', 'XMIN_Shadow2', 'XMAX_Shadow2', 'XMIN_Shadow3', 'XMAX_Shadow3',  'XTBPRD_Active', 'XTBPRD_Shadow1', 'XTBPRD_Shadow2', 'XTBPRD_Shadow3',  'Load_Mode', 'Shadow_Level', 'Shadow_register_load_once', 'Repeat_Count_Shadow_Buffer2', 'Repeat_Count_Shadow_Buffer3'});
-                
+           
+            DiodeEmulation = matlab.system.display.SectionGroup(...
+            'Title', 'Diode Emulation', ...
+            'PropertyList',  {'Enable_DE_Mode', 'DE_Mode', 'DE_Mode_Delay', 'TRIPH', 'TRIPL', 'TRIP_ChannelA', 'PWMA_Signal_DE_Mode', 'TRIP_ChannelB', 'PWMB_Signal_DE_Mode', 'Bypss_DEPWM_Generation', 'Force_DEACTIVE', 'Enable_Trip_Monitor_Mode', 'DE_Monitor_Mode_Threshold', 'Decrement_step_size', 'Increment_step_size'});
 
+            MDL = matlab.system.display.SectionGroup(...
+            'Title', 'Minimum Deadband Logic', ...
+            'PropertyList', {'Enable_MDLA', 'Ref_signal_MDLA', 'Invert_Ref_signal_BlockA', 'Delay_PWMA', 'Blocking_signal_PWMA', 'Blocking_signal_AND_OR_PWMA', 'Enable_MDLB', 'Ref_signal_MDLB', 'Invert_Ref_signal_BlockB', 'Delay_PWMB', 'Blocking_signal_PWMB', 'Blocking_signal_AND_OR_PWMB'});
 
-            groups = [TimeBase, CounterCompare, ActionQualifier, TripZone, DigitalCompare, DeadBand, Chopper, EventTrigger, HRPWM, XCMP];
+            ICL = matlab.system.display.SectionGroup(...
+            'Title', 'Illegal Combo Logic', ...
+            'PropertyList', {'Enable_ICL_BlockA', 'Select_IN3_BlockA', 'BlockA_IN30_IN20_IN10', 'BlockA_IN30_IN20_IN11', 'BlockA_IN30_IN21_IN10', 'BlockA_IN30_IN21_IN11', 'BlockA_IN31_IN20_IN10', 'BlockA_IN31_IN20_IN11', 'BlockA_IN31_IN21_IN10', 'BlockA_IN31_IN21_IN11', 'Enable_ICL_BlockB', 'Select_IN3_BlockB', 'BlockB_IN30_IN20_IN10', 'BlockB_IN30_IN20_IN11', 'BlockB_IN30_IN21_IN10', 'BlockB_IN30_IN21_IN11', 'BlockB_IN31_IN20_IN10', 'BlockB_IN31_IN20_IN11', 'BlockB_IN31_IN21_IN10', 'BlockB_IN31_IN21_IN11'});
+
+            GlobalLoad = matlab.system.display.SectionGroup(...
+            'Title', 'Global Load', ...
+            'PropertyList', {'Enable_Global_Shadow_Active_Load', 'Global_Load_Pulse_Section', 'Global_Load_Strobe_Period', 'Enable_OneShot_Mode', 'Enable_Reload_OneShot_Mode', 'Force_Load_Event', 'Global_PWM_Load_Link'});
+
+            groups = [TimeBase, CounterCompare, ActionQualifier, TripZone, DigitalCompare, DeadBand, Chopper, EventTrigger, HRPWM, XCMP, DiodeEmulation, MDL, ICL, GlobalLoad];
 
             
         end  
@@ -6044,6 +7017,22 @@ end
                 epwm_xcmp_struct = struct('base', obj.baseaddr, 'instance', obj.module_instance, 'enable_XCMP', obj.Enable_XCMP_Mode, 'enable_Split', obj.Enable_Split_XCMP, 'xcmp_cmpa', uint16(obj.Allocate_XCMP_CMPAEnum), 'xcmp_cmpb', uint16(obj.Allocate_XCMP_CMPBEnum), 'load_mode', uint16(obj.Load_ModeEnum), 'shadow_level', uint16(obj.Shadow_LevelEnum), 'shadow_register_load_once', uint16(obj.Shadow_register_load_onceEnum), 'rpt_cnt_shdw_buffer2', obj.Repeat_Count_Shadow_Buffer2, 'rpt_cnt_shdw_buffer3', obj.Repeat_Count_Shadow_Buffer3, 'xcmp1_active', uint16(obj.XCMP1_Active), 'xcmp2_active', uint16(obj.XCMP2_Active), 'xcmp3_active', uint16(obj.XCMP3_Active), 'xcmp4_active', uint16(obj.XCMP4_Active), 'xcmp5_active', uint16(obj.XCMP5_Active), 'xcmp6_active', uint16(obj.XCMP6_Active), 'xcmp7_active', uint16(obj.XCMP7_Active), 'xcmp8_active', uint16(obj.XCMP8_Active), 'xcmp1_shadow1', obj.XCMP1_SHADOW1, 'xcmp2_shadow1', obj.XCMP2_SHADOW1, 'xcmp3_shadow1', obj.XCMP3_SHADOW1, 'xcmp4_shadow1', obj.XCMP4_SHADOW1, 'xcmp5_shadow1', obj.XCMP5_SHADOW1, 'xcmp6_shadow1', obj.XCMP6_SHADOW1, 'xcmp7_shadow1', obj.XCMP7_SHADOW1, 'xcmp8_shadow1', obj.XCMP8_SHADOW1, 'xcmp1_shadow2', obj.XCMP1_SHADOW2, 'xcmp2_shadow2', obj.XCMP2_SHADOW2, 'xcmp3_shadow2', obj.XCMP3_SHADOW2, 'xcmp4_shadow2', obj.XCMP4_SHADOW2, 'xcmp5_shadow2', obj.XCMP5_SHADOW2, 'xcmp6_shadow2', obj.XCMP6_SHADOW2, 'xcmp7_shadow2', obj.XCMP7_SHADOW2, 'xcmp8_shadow2', obj.XCMP8_SHADOW2, 'xcmp1_shadow3', obj.XCMP1_SHADOW3, 'xcmp2_shadow3', obj.XCMP2_SHADOW3, 'xcmp3_shadow3', obj.XCMP3_SHADOW3, 'xcmp4_shadow3', obj.XCMP4_SHADOW3, 'xcmp5_shadow3', obj.XCMP5_SHADOW3, 'xcmp6_shadow3', obj.XCMP6_SHADOW3, 'xcmp7_shadow3', obj.XCMP7_SHADOW3, 'xcmp8_shadow3', obj.XCMP8_SHADOW3, 'xtbprd_active', obj.XTBPRD_Active, 'xtbprd_shadow1', obj.XTBPRD_Shadow1, 'xtbprd_shadow2', obj.XTBPRD_Shadow2, 'xtbprd_shadow3', obj.XTBPRD_Shadow3, 'xmin_active', obj.XMIN_Active, 'xmax_active', obj.XMAX_Active, 'xmin_shadow1', obj.XMIN_Shadow1, 'xmax_shadow1', obj.XMAX_Shadow1, 'xmin_shadow2', obj.XMIN_Shadow2, 'xmax_shadow2', obj.XMAX_Shadow2, 'xmin_shadow3', obj.XMIN_Shadow3, 'xmax_shadow3', obj.XMAX_Shadow3, 'epwmxa_tbctr_xcmp1_active', uint16(obj.EPWMXA_tbctr_XCMP1_activeEnum), 'epwmxa_tbctr_xcmp2_active', uint16(obj.EPWMXA_tbctr_XCMP2_activeEnum), 'epwmxa_tbctr_xcmp3_active', uint16(obj.EPWMXA_tbctr_XCMP3_activeEnum), 'epwmxa_tbctr_xcmp4_active', uint16(obj.EPWMXA_tbctr_XCMP4_activeEnum), 'epwmxa_tbctr_xcmp5_active', uint16(obj.EPWMXA_tbctr_XCMP5_activeEnum), 'epwmxa_tbctr_xcmp6_active', uint16(obj.EPWMXA_tbctr_XCMP6_activeEnum), 'epwmxa_tbctr_xcmp7_active', uint16(obj.EPWMXA_tbctr_XCMP7_activeEnum), 'epwmxa_tbctr_xcmp8_active', uint16(obj.EPWMXA_tbctr_XCMP8_activeEnum), 'epwmxb_tbctr_xcmp5_active', uint16(obj.EPWMXB_tbctr_XCMP5_activeEnum), 'epwmxb_tbctr_xcmp6_active', uint16(obj.EPWMXB_tbctr_XCMP6_activeEnum), 'epwmxb_tbctr_xcmp7_active', uint16(obj.EPWMXB_tbctr_XCMP7_activeEnum), 'epwmxb_tbctr_xcmp8_active', uint16(obj.EPWMXB_tbctr_XCMP8_activeEnum), 'epwmxa_tbctr_xcmp1_shadow1', uint16(obj.EPWMXA_tbctr_XCMP1_SHADOW1Enum), 'epwmxa_tbctr_xcmp2_shadow1', uint16(obj.EPWMXA_tbctr_XCMP2_SHADOW1Enum), 'epwmxa_tbctr_xcmp3_shadow1', uint16(obj.EPWMXA_tbctr_XCMP3_SHADOW1Enum), 'epwmxa_tbctr_xcmp4_shadow1', uint16(obj.EPWMXA_tbctr_XCMP4_SHADOW1Enum), 'epwmxa_tbctr_xcmp5_shadow1', uint16(obj.EPWMXA_tbctr_XCMP5_SHADOW1Enum), 'epwmxa_tbctr_xcmp6_shadow1', uint16(obj.EPWMXA_tbctr_XCMP6_SHADOW1Enum), 'epwmxa_tbctr_xcmp7_shadow1', uint16(obj.EPWMXA_tbctr_XCMP7_SHADOW1Enum), 'epwmxa_tbctr_xcmp8_shadow1', uint16(obj.EPWMXA_tbctr_XCMP8_SHADOW1Enum), 'epwmxb_tbctr_xcmp5_shadow1', uint16(obj.EPWMXB_tbctr_XCMP5_SHADOW1Enum), 'epwmxb_tbctr_xcmp6_shadow1', uint16(obj.EPWMXB_tbctr_XCMP6_SHADOW1Enum), 'epwmxb_tbctr_xcmp7_shadow1', uint16(obj.EPWMXB_tbctr_XCMP7_SHADOW1Enum), 'epwmxb_tbctr_xcmp8_shadow1', uint16(obj.EPWMXB_tbctr_XCMP8_SHADOW1Enum), 'epwmxa_tbctr_xcmp1_shadow2', uint16(obj.EPWMXA_tbctr_XCMP1_SHADOW2Enum), 'epwmxa_tbctr_xcmp2_shadow2', uint16(obj.EPWMXA_tbctr_XCMP2_SHADOW2Enum), 'epwmxa_tbctr_xcmp3_shadow2', uint16(obj.EPWMXA_tbctr_XCMP3_SHADOW2Enum), 'epwmxa_tbctr_xcmp4_shadow2', uint16(obj.EPWMXA_tbctr_XCMP4_SHADOW2Enum), 'epwmxa_tbctr_xcmp5_shadow2', uint16(obj.EPWMXA_tbctr_XCMP5_SHADOW2Enum), 'epwmxa_tbctr_xcmp6_shadow2', uint16(obj.EPWMXA_tbctr_XCMP6_SHADOW2Enum), 'epwmxa_tbctr_xcmp7_shadow2', uint16(obj.EPWMXA_tbctr_XCMP7_SHADOW2Enum), 'epwmxa_tbctr_xcmp8_shadow2', uint16(obj.EPWMXA_tbctr_XCMP8_SHADOW2Enum), 'epwmxb_tbctr_xcmp5_shadow2', uint16(obj.EPWMXB_tbctr_XCMP5_SHADOW2Enum), 'epwmxb_tbctr_xcmp6_shadow2', uint16(obj.EPWMXB_tbctr_XCMP6_SHADOW2Enum), 'epwmxb_tbctr_xcmp7_shadow2', uint16(obj.EPWMXB_tbctr_XCMP7_SHADOW2Enum), 'epwmxb_tbctr_xcmp8_shadow2', uint16(obj.EPWMXB_tbctr_XCMP8_SHADOW2Enum), 'epwmxa_tbctr_xcmp1_shadow3', uint16(obj.EPWMXA_tbctr_XCMP1_SHADOW3Enum), 'epwmxa_tbctr_xcmp2_shadow3', uint16(obj.EPWMXA_tbctr_XCMP2_SHADOW3Enum), 'epwmxa_tbctr_xcmp3_shadow3', uint16(obj.EPWMXA_tbctr_XCMP3_SHADOW3Enum), 'epwmxa_tbctr_xcmp4_shadow3', uint16(obj.EPWMXA_tbctr_XCMP4_SHADOW3Enum), 'epwmxa_tbctr_xcmp5_shadow3', uint16(obj.EPWMXA_tbctr_XCMP5_SHADOW3Enum), 'epwmxa_tbctr_xcmp6_shadow3', uint16(obj.EPWMXA_tbctr_XCMP6_SHADOW3Enum), 'epwmxa_tbctr_xcmp7_shadow3', uint16(obj.EPWMXA_tbctr_XCMP7_SHADOW3Enum), 'epwmxa_tbctr_xcmp8_shadow3', uint16(obj.EPWMXA_tbctr_XCMP8_SHADOW3Enum), 'epwmxb_tbctr_xcmp5_shadow3', uint16(obj.EPWMXB_tbctr_XCMP5_SHADOW3Enum), 'epwmxb_tbctr_xcmp6_shadow3', uint16(obj.EPWMXB_tbctr_XCMP6_SHADOW3Enum), 'epwmxb_tbctr_xcmp7_shadow3', uint16(obj.EPWMXB_tbctr_XCMP7_SHADOW3Enum), 'epwmxb_tbctr_xcmp8_shadow3', uint16(obj.EPWMXB_tbctr_XCMP8_SHADOW3Enum));
                 coder.cstructname(epwm_xcmp_struct, 'XCMPStruct', 'extern', 'HeaderFile', 'MW_EPWM.h');
                 coder.ceval('epwm_xcmp_setup', coder.ref(epwm_xcmp_struct));
+
+                epwm_diode_emulation_struct = struct('base', obj.baseaddr, 'de_mode', obj.DE_ModeEnum, 'delay', uint8(obj.DE_Mode_Delay), 'decompsel_tripl', obj.TRIPLEnum, 'decompsel_triph', obj.TRIPHEnum, 'PWMA_Signal_DE_Mode', obj.PWMA_Signal_DE_ModeEnum, 'Trip_ChannelA', obj.TRIP_ChannelAEnum, 'PWMB_Signal_DE_Mode', obj.PWMB_Signal_DE_ModeEnum, 'Trip_ChannelB', obj.TRIP_ChannelBEnum, 'de_monitor_threshold', uint16(obj.DE_Monitor_Mode_Threshold), 'dec_step_size', uint8(obj.Decrement_step_size), 'inc_step_size', uint8(obj.Increment_step_size), 'Enable_DE_Mode', obj.Enable_DE_Mode, 'bypass_de_pwm', obj.Bypss_DEPWM_Generation, 'Force_DEACTIVE', obj.Force_DEACTIVE, 'Enable_Trip_Monitor', obj.Enable_Trip_Monitor_Mode);
+                coder.cstructname(epwm_diode_emulation_struct, 'DiodeEmulation_Struct', 'extern', 'HeaderFile', 'MW_EPWM.h');
+                coder.ceval('epwm_diode_emulation_setup', coder.ref(epwm_diode_emulation_struct));
+
+                epwm_mdl_struct = struct('base', obj.baseaddr, 'enable_MDLA', obj.Enable_MDLA, 'Ref_signal_MDLA', uint32(obj.Ref_signal_MDLAEnum), 'Invert_RefSignal_BlockA', uint32(obj.Invert_Ref_signal_BlockAEnum), 'Delay_PWMA', uint32(obj.Delay_PWMA), 'Blocking_signal_PWMA', uint32(obj.Blocking_signal_PWMAEnum), 'Blocking_signal_AND_OR_PWMA', uint32(obj.Blocking_signal_AND_OR_PWMAEnum), 'Enable_MDLB', obj.Enable_MDLB, 'Ref_signal_MDLB', uint32(obj.Ref_signal_MDLBEnum), 'Invert_Ref_signal_BlockB', uint32(obj.Invert_Ref_signal_BlockBEnum), 'Delay_PWMB', uint32(obj.Delay_PWMB), 'Blocking_signal_PWMB', uint32(obj.Blocking_signal_PWMBEnum), 'Blocking_signal_AND_OR_PWMB', uint32(obj.Blocking_signal_AND_OR_PWMBEnum));
+                coder.cstructname(epwm_mdl_struct, 'MinimumDeadband_Struct', 'extern', 'HeaderFile', 'MW_EPWM.h');
+                coder.ceval('epwm_minimum_deadband_setup', coder.ref(epwm_mdl_struct));
+
+                epwm_icl_struct = struct('base', obj.baseaddr, 'enable_iclA', obj.Enable_ICL_BlockA, 'IN3_BlockA', uint32(obj.Select_IN3_BlockAEnum), 'BlockA000', uint32(obj.BlockA_IN30_IN20_IN10Enum), 'BlockA001', uint32(obj.BlockA_IN30_IN20_IN11Enum), 'BlockA010', uint32(obj.BlockA_IN30_IN21_IN10Enum), 'BlockA011', uint32(obj.BlockA_IN30_IN21_IN11Enum), 'BlockA100', uint32(obj.BlockA_IN31_IN20_IN10Enum), 'BlockA101', uint32(obj.BlockA_IN31_IN20_IN11Enum), 'BlockA110', uint32(obj.BlockA_IN31_IN21_IN10Enum), 'BlockA111', uint32(obj.BlockA_IN31_IN21_IN11Enum), 'enable_iclB', obj.Enable_ICL_BlockB, 'IN3_blockB', uint32(obj.Select_IN3_BlockBEnum), 'BlockB000', uint32(obj.BlockB_IN30_IN20_IN10Enum),'BlockB001', uint32(obj.BlockB_IN30_IN20_IN11Enum), 'BlockB010', uint32(obj.BlockB_IN30_IN21_IN10Enum), 'BlockB011', uint32(obj.BlockB_IN30_IN21_IN11Enum), 'BlockB100', uint32(obj.BlockB_IN31_IN20_IN10Enum), 'BlockB101', uint32(obj.BlockB_IN31_IN20_IN11Enum), 'BlockB110', uint32(obj.BlockB_IN31_IN21_IN10Enum), 'BlockB111', uint32(obj.BlockB_IN31_IN21_IN11Enum));
+                coder.cstructname(epwm_icl_struct, 'IllegalComboLogic_Struct', 'extern', 'HeaderFile', 'MW_EPWM.h');
+                coder.ceval('epwm_illegal_combo_logic_setup', coder.ref(epwm_icl_struct));
+
+                epwm_global_load_struct = struct('base', obj.baseaddr, 'instance', obj.module_instance,'EnableGlobalShadowtoActiveLoad', obj.Enable_Global_Shadow_Active_Load, 'GlobalLoadPulseSelection', obj.Global_Load_Pulse_SectionEnum, 'GlobalLoadStrobePeriod', uint16(obj.Global_Load_Strobe_PeriodEnum), 'EnableOneShot', obj.Enable_OneShot_Mode, 'EnableReloadOneShotMode', obj.Enable_Reload_OneShot_Mode, 'EnableForceLoadEvent', obj.Force_Load_Event, 'CurrentLink', obj.Global_PWM_Load_LinkEnum);
+                coder.cstructname(epwm_global_load_struct, 'GlobalLoad_Struct', 'extern', 'HeaderFile', 'MW_EPWM.h');
+                coder.ceval('epwm_global_load_setup', coder.ref(epwm_global_load_struct));
             end
         end
         
@@ -6630,9 +7619,24 @@ end
                 flag = true;
             elseif((strcmp(propertyName, 'DCBLow_CombTrip1_Input') | strcmp(propertyName, 'DCBLow_CombTrip2_Input') | strcmp(propertyName, 'DCBLow_CombTrip3_Input') | strcmp(propertyName, 'DCBLow_CombTrip4_Input') | strcmp(propertyName, 'DCBLow_CombTrip5_Input') | strcmp(propertyName, 'DCBLow_CombTrip6_Input') | strcmp(propertyName, 'DCBLow_CombTrip7_Input') | strcmp(propertyName, 'DCBLow_CombTrip8_Input') | strcmp(propertyName, 'DCBLow_CombTrip9_Input') | strcmp(propertyName, 'DCBLow_CombTrip10_Input') | strcmp(propertyName, 'DCBLow_CombTrip11_Input') | strcmp(propertyName, 'DCBLow_CombTrip12_Input') | strcmp(propertyName, 'DCBLow_CombTrip13_Input') | strcmp(propertyName, 'DCBLow_CombTrip14_Input') | strcmp(propertyName, 'DCBLow_CombTrip15_Input')) && (~(isequal(obj.DCBLow, 'All Trips'))))
                 flag = true;
+            elseif((strcmp(propertyName, 'DE_Mode') | strcmp(propertyName, 'DE_Mode_Delay') | strcmp(propertyName, 'TRIPH') | strcmp(propertyName, 'TRIPL') | strcmp(propertyName, 'TRIP_ChannelA') | strcmp(propertyName, 'PWMA_Signal_DE_Mode') | strcmp(propertyName, 'TRIP_ChannelB') | strcmp(propertyName, 'PWMB_Signal_DE_Mode') | strcmp(propertyName, 'Bypss_DEPWM_Generation') | strcmp(propertyName, 'Force_DEACTIVE') | strcmp(propertyName, 'Enable_Trip_Monitor_Mode') | strcmp(propertyName, 'DE_Monitor_Mode_Threshold') | strcmp(propertyName, 'Decrement_step_size') | strcmp(propertyName, 'Increment_step_size')) && (obj.Enable_DE_Mode == false))
+                flag = true;
+            elseif((strcmp(propertyName, 'DE_Monitor_Mode_Threshold') | strcmp(propertyName, 'Decrement_step_size') | strcmp(propertyName, 'Increment_step_size')) && (obj.Enable_Trip_Monitor_Mode == false))
+                flag = true;
+            elseif((strcmp(propertyName, 'Ref_signal_MDLA') | strcmp(propertyName, 'Invert_Ref_signal_BlockA') | strcmp(propertyName, 'Delay_PWMA') | strcmp(propertyName, 'Blocking_signal_PWMA') | strcmp(propertyName, 'Blocking_signal_AND_OR_PWMA')) && (obj. Enable_MDLA == false))
+                flag = true;
+            elseif((strcmp(propertyName, 'Ref_signal_MDLB') | strcmp(propertyName, 'Invert_Ref_signal_BlockB') | strcmp(propertyName, 'Delay_PWMB') | strcmp(propertyName, 'Blocking_signal_PWMB') | strcmp(propertyName, 'Blocking_signal_AND_OR_PWMB')) && (obj. Enable_MDLB == false))
+                flag = true;
+            elseif((strcmp(propertyName, 'Select_IN3_BlockA') | strcmp(propertyName, 'BlockA_IN30_IN20_IN10') | strcmp(propertyName, 'BlockA_IN30_IN20_IN11') | strcmp(propertyName, 'BlockA_IN30_IN21_IN10') | strcmp(propertyName, 'BlockA_IN30_IN21_IN11') | strcmp(propertyName, 'BlockA_IN31_IN20_IN10') | strcmp(propertyName, 'BlockA_IN31_IN20_IN11') | strcmp(propertyName, 'BlockA_IN31_IN21_IN10') | strcmp(propertyName, 'BlockA_IN31_IN21_IN11')) && (obj.Enable_ICL_BlockA == false))
+                flag = true;
+            elseif((strcmp(propertyName, 'Select_IN3_BlockB') | strcmp(propertyName, 'BlockB_IN30_IN20_IN10') | strcmp(propertyName, 'BlockB_IN30_IN20_IN11') | strcmp(propertyName, 'BlockB_IN30_IN21_IN10') | strcmp(propertyName, 'BlockB_IN30_IN21_IN11') | strcmp(propertyName, 'BlockB_IN31_IN20_IN10') | strcmp(propertyName, 'BlockB_IN31_IN20_IN11') | strcmp(propertyName, 'BlockB_IN31_IN21_IN10') | strcmp(propertyName, 'BlockB_IN31_IN21_IN11')) && (obj.Enable_ICL_BlockB == false))
+                flag = true;
+            elseif((strcmp(propertyName, 'Global_Load_Pulse_Section') | strcmp(propertyName, 'Global_Load_Strobe_Period') | strcmp(propertyName, 'Enable_OneShot_Mode') | strcmp(propertyName, 'Global_PWM_Load_Link')) && (obj.Enable_Global_Shadow_Active_Load == false))
+                flag = true;
+            elseif((strcmp(propertyName, 'Enable_Reload_OneShot_Mode') | strcmp(propertyName, 'Force_Load_Event')) && (obj.Enable_OneShot_Mode == false))
+                flag = true;
             else
                 flag = false;
-            
             end
         end
 

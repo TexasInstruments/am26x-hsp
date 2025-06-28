@@ -53,7 +53,6 @@ addpath(tgtDir);
 addpath(fullfile(tgtDir, 'registry'));
 addpath(fullfile(tgtDir, 'blocks'));
 addpath(fullfile(tgtDir, 'src'));
-addpath(fullfile(tgtDir, 'lib'));
 addpath(fullfile(tgtDir, 'blocks', 'block_ADC'));
 addpath(fullfile(tgtDir, 'blocks', 'block_CAN'));
 addpath(fullfile(tgtDir, 'blocks', 'block_CHAR'));
@@ -63,6 +62,8 @@ addpath(fullfile(tgtDir, 'blocks', 'block_ECAP'));
 addpath(fullfile(tgtDir, 'blocks', 'block_EPWM'));
 addpath(fullfile(tgtDir, 'blocks', 'block_EQEP'));
 addpath(fullfile(tgtDir, 'blocks', 'block_GPIO'));
+addpath(fullfile(tgtDir, 'blocks', 'block_IPC'));
+addpath(fullfile(tgtDir, 'blocks', 'block_IPC_HWI'));
 addpath(fullfile(tgtDir, 'blocks', 'block_MCSPI'));
 addpath(fullfile(tgtDir, 'blocks', 'block_HWI'));
 addpath(fullfile(tgtDir, 'blocks', 'block_SDFM'));
@@ -90,6 +91,7 @@ setpref('AM26xPILpref','COMport', 'COM1');
 setpref('AM26xPILpref','Baud', '115200');
 setpref('AM26xPILpref', 'PILHardware', 'AM263X');
 
+setpref('MultiCore', 'Core', 'Core0');
 
 
 % Get tool paths and save as mat file inside target folder
@@ -103,10 +105,10 @@ dlgtitle = 'Setup AM26x HSP';
 fieldsize = [1 100; 1 100; 1 100; 1 100; 1 100; 5 100];
 definput = {'C:\ti\ccs1281', ...
             'C:\ti\ccs1281\ccs\tools\compiler\ti-cgt-armllvm_3.2.2.LTS', ...
-            'C:\ti\mcu_plus_sdk_am263x_10_01_00_31',...
-            'C:\ti\mcu_plus_sdk_am263px_10_01_00_31',...
-            'C:\ti\mcu_plus_sdk_am261x_10_00_01_10',...
-            'Please note: It is not mandatory to install both AM263x MCUSDK, AM263Px MCUSDK and AM261x MCUSDK. You may install the MCUSDK for atleast one device (AM263x or AM263Px or AM261x) and enter the corresponding path.'};
+            'C:\ti\mcu_plus_sdk_am263x_10_02_00_13',...
+            'C:\ti\mcu_plus_sdk_am263px_10_02_00_15',...
+            'C:\ti\mcu_plus_sdk_am261x_10_02_00_15',...
+            'Please note: It is not mandatory to install both AM263x MCUSDK and AM263Px MCUSDK. You may install the MCUSDK for atleast one device (AM263x or AM263Px) and enter the corresponding path.'};
 tool_install_path = inputdlg(prompt,dlgtitle,fieldsize,definput);
 
 save(fullfile(tgtDir, 'toolchain', 'am263x', '+matlabshared', '+toolchain', '+ti_arm_clang', 'tool_install_paths.mat'), "tool_install_path");

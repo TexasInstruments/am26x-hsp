@@ -1,11 +1,7 @@
 <?xml version="1.0"?>
 <MF0 version="1.1" packageUris="http://schema.mathworks.com/mf0/target/19700101 http://schema.mathworks.com/mf0/targetmodelclasses/19700101">
   <target.Board type="target.Board">
-    <Name>AM261X LP</Name>
-    <Tools type="target.Tools"/>
-  </target.Board>
-  <target.Board type="target.Board">
-    <Name>AM263PX</Name>
+    <Name>AM263X ControlCard</Name>
     <Tools type="target.Tools"/>
   </target.Board>
   <target.Board type="target.Board">
@@ -13,7 +9,23 @@
     <Tools type="target.Tools"/>
   </target.Board>
   <target.Board type="target.Board">
+    <Name>AM261X</Name>
+    <Tools type="target.Tools"/>
+  </target.Board>
+  <target.Board type="target.Board">
+    <Name>AM263PX</Name>
+    <Tools type="target.Tools"/>
+  </target.Board>
+  <target.Board type="target.Board">
+    <Name>AM261X LP</Name>
+    <Tools type="target.Tools"/>
+  </target.Board>
+  <target.Board type="target.Board">
     <Name>AM263PX ControlCard</Name>
+    <Tools type="target.Tools"/>
+  </target.Board>
+  <target.Board type="target.Board">
+    <Name>AM261X SOM</Name>
     <Tools type="target.Tools"/>
   </target.Board>
   <target.Board type="target.Board">
@@ -22,10 +34,6 @@
   </target.Board>
   <target.Board type="target.Board">
     <Name>AM263X</Name>
-    <Tools type="target.Tools"/>
-  </target.Board>
-  <target.Board type="target.Board">
-    <Name>AM263X ControlCard</Name>
     <Tools type="target.Tools"/>
   </target.Board>
 </MF0>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<productinfo version="3.0">
+  <name>AM261X Deployer</name>
+  <targetname>AM26X</targetname>
+  <targetinitializationcall>am261x_HardwareInit_Fcn()</targetinitializationcall>
+  <includefile>am261x_main.h</includefile>
+  <needsmainfcn>true</needsmainfcn>
+  <mainfcnsignature>int main(int argc, char **argv)</mainfcnsignature>
+  <token Name="ARMCORTEXR_ROOT_DIR" Value="matlabshared.target.am26x.getReferenceTargetRootFolder"/>
+  <detectoverrun>false</detectoverrun>
+  <honorruntimestoprequest>true</honorruntimestoprequest>
+  <sdcardinbackgroundtask>false</sdcardinbackgroundtask>
+  <includestdio>true</includestdio>
+  <enableoneclick>false</enableoneclick>
+  <buildconfigurationinfofile>$(TARGET_ROOT)/registry/attributes/AM261XDebugBuildConfiguration.xml</buildconfigurationinfofile>
+</productinfo>

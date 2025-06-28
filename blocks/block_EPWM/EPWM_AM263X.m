@@ -1321,6 +1321,47 @@ classdef EPWM_AM263X < matlab.System & coder.ExternalDependency
          DCBHigh_CombTrip14_Input (1,1) logical = false;
          %DCB High Combinational Trip 15 Input
          DCBHigh_CombTrip15_Input (1,1) logical = false;
+         
+         %Diode Emulation
+         
+         %Enable DE Mode
+         Enable_DE_Mode (1,1) logical = false;
+         %Select DE Mode
+         DE_Mode = 'CBC Mode';
+         %Set DE Mode Reentry Delay
+         DE_Mode_Delay = 0;
+
+         %DECOMPSEL
+         %TRIPH
+         TRIPH = 'Trip source is Input XBAR out0 signal';
+         %TRIPL
+         TRIPL = 'Trip source is Input XBAR out9 signal';
+
+         %DEACTCTL
+         %Trip for Channel A
+         TRIP_ChannelA = 'TRIPL';
+         %PWMA Signal in DE Mode
+         PWMA_Signal_DE_Mode = 'Synchronized version of TRIP signal';
+         %Trip for Channel B
+         TRIP_ChannelB = 'TRIPL';
+         %PWMB Signal in DE Mode
+         PWMB_Signal_DE_Mode = 'Synchronized version of TRIP signal';
+         %Bypass DE PWM Generation Loic
+         Bypss_DEPWM_Generation (1,1) logical = false;
+
+         %Force set DEACTIVE flag
+         Force_DEACTIVE (1,1) logical = false;
+         %Enable Trip Monitor Mode
+         Enable_Trip_Monitor_Mode (1,1) logical = false;
+         %DE Monitor Mode Threshold
+         DE_Monitor_Mode_Threshold = 0;
+
+         %DEMONSTEP
+
+         %Decrement Step Size
+         Decrement_step_size = 0;
+         %Increment Step Size
+         Increment_step_size = 0;
 
         
     end
@@ -1538,6 +1579,14 @@ classdef EPWM_AM263X < matlab.System & coder.ExternalDependency
         Load_ModeSet = matlab.system.StringSet({'Load Once', 'Load multiple times'});
         Shadow_LevelSet = matlab.system.StringSet({'Shadow level zero', 'Shadow level one', 'Shadow level two', 'Shadow level three'});
         Shadow_register_load_onceSet = matlab.system.StringSet({'Do not load any shadow register set', 'Load shadow register set 1', 'Load shadow register set 2', 'Load shadow register set 3'});  
+        DE_ModeSet = matlab.system.StringSet({'CBC Mode', 'OST Mode'});
+        TRIPHSet = matlab.system.StringSet({'Trip source is Input XBAR out0 signal', 'Trip source is Input XBAR out1 signal', 'Trip source is Input XBAR out2 signal', 'Trip source is Input XBAR out3 signal', 'Trip source is Input XBAR out4 signal', 'Trip source is Input XBAR out5 signal', 'Trip source is Input XBAR out6 signal', 'Trip source is Input XBAR out7 signal', 'Trip source is Input XBAR out8 signal', 'Trip source is Input XBAR out9 signal', 'Trip source is Input XBAR out10 signal', 'Trip source is Input XBAR out11 signal', 'Trip source is Input XBAR out12 signal', 'Trip source is Input XBAR out13 signal', 'Trip source is Input XBAR out14 signal', 'Trip source is Input XBAR out15 signal', 'Trip source is Input XBAR out16 signal', 'Trip source is Input XBAR out17 signal', 'Trip source is Input XBAR out18 signal', 'Trip source is Input XBAR out19 signal', 'Trip source is Input XBAR out20 signal', 'Trip source is Input XBAR out21 signal', 'Trip source is Input XBAR out22 signal', 'Trip source is Input XBAR out23 signal', 'Trip source is Input XBAR out24 signal', 'Trip source is Input XBAR out25 signal', 'Trip source is Input XBAR out26 signal', 'Trip source is Input XBAR out27 signal', 'Trip source is Input XBAR out28 signal', 'Trip source is Input XBAR out29 signal', 'Trip source is Input XBAR out30 signal', 'Trip source is Input XBAR out31 signal', 'Trip source is CMPSSA0 signal', 'Trip source is CMPSSA1 signal', 'Trip source is CMPSSA2 signal', 'Trip source is CMPSSA3 signal', 'Trip source is CMPSSA4 signal', 'Trip source is CMPSSA5 signal', 'Trip sorce is CMPSSA6 signal', 'Trip source is CMPSSA7 signal', 'Trip source is CMPSSA8 signal', 'Trip source is CMPSSA9 signal', 'Trip source is CMPSSB0 signal', 'Trip source is CMPSSB1 signal', 'Trip source is CMPSSB2 signal', 'Trip source is CMPSSB3 signal', 'Trip source is CMPSSB4 signal', 'Trip source is CMPSSB5 signal', 'Trip sorce is CMPSSB6 signal', 'Trip source is CMPSSB7 signal', 'Trip source is CMPSSB8 signal', 'Trip source is CMPSSB9 signal'});
+        TRIPLSet = matlab.system.StringSet({'Trip source is Input XBAR out0 signal', 'Trip source is Input XBAR out1 signal', 'Trip source is Input XBAR out2 signal', 'Trip source is Input XBAR out3 signal', 'Trip source is Input XBAR out4 signal', 'Trip source is Input XBAR out5 signal', 'Trip source is Input XBAR out6 signal', 'Trip source is Input XBAR out7 signal', 'Trip source is Input XBAR out8 signal', 'Trip source is Input XBAR out9 signal', 'Trip source is Input XBAR out10 signal', 'Trip source is Input XBAR out11 signal', 'Trip source is Input XBAR out12 signal', 'Trip source is Input XBAR out13 signal', 'Trip source is Input XBAR out14 signal', 'Trip source is Input XBAR out15 signal', 'Trip source is Input XBAR out16 signal', 'Trip source is Input XBAR out17 signal', 'Trip source is Input XBAR out18 signal', 'Trip source is Input XBAR out19 signal', 'Trip source is Input XBAR out20 signal', 'Trip source is Input XBAR out21 signal', 'Trip source is Input XBAR out22 signal', 'Trip source is Input XBAR out23 signal', 'Trip source is Input XBAR out24 signal', 'Trip source is Input XBAR out25 signal', 'Trip source is Input XBAR out26 signal', 'Trip source is Input XBAR out27 signal', 'Trip source is Input XBAR out28 signal', 'Trip source is Input XBAR out29 signal', 'Trip source is Input XBAR out30 signal', 'Trip source is Input XBAR out31 signal', 'Trip source is CMPSSA0 signal', 'Trip source is CMPSSA1 signal', 'Trip source is CMPSSA2 signal', 'Trip source is CMPSSA3 signal', 'Trip source is CMPSSA4 signal', 'Trip source is CMPSSA5 signal', 'Trip sorce is CMPSSA6 signal', 'Trip source is CMPSSA7 signal', 'Trip source is CMPSSA8 signal', 'Trip source is CMPSSA9 signal', 'Trip source is CMPSSB0 signal', 'Trip source is CMPSSB1 signal', 'Trip source is CMPSSB2 signal', 'Trip source is CMPSSB3 signal', 'Trip source is CMPSSB4 signal', 'Trip source is CMPSSB5 signal', 'Trip sorce is CMPSSB6 signal', 'Trip source is CMPSSB7 signal', 'Trip source is CMPSSB8 signal', 'Trip source is CMPSSB9 signal'});
+        TRIP_ChannelASet = matlab.system.StringSet({'TRIPL', 'TRIPH'});
+        PWMA_Signal_DE_ModeSet = matlab.system.StringSet({'Synchronized version of TRIP signal', 'Synchronized and inverted version of TRIP signal', 'Constant LOW signal', 'Constant HIGH signal'});
+        TRIP_ChannelBSet = matlab.system.StringSet({'TRIPL', 'TRIPH'});
+        PWMB_Signal_DE_ModeSet = matlab.system.StringSet({'Synchronized version of TRIP signal', 'Synchronized and inverted version of TRIP signal', 'Constant LOW signal', 'Constant HIGH signal'});
+        
     end
     
     
@@ -1756,6 +1805,13 @@ classdef EPWM_AM263X < matlab.System & coder.ExternalDependency
         Load_ModeEnum;
         Shadow_LevelEnum;
         Shadow_register_load_onceEnum;
+        DE_ModeEnum;
+        TRIPHEnum;
+        TRIPLEnum;
+        TRIP_ChannelAEnum;
+        PWMA_Signal_DE_ModeEnum;
+        TRIP_ChannelBEnum;
+        PWMB_Signal_DE_ModeEnum;
     end
 
     properties (Access = private)
@@ -1768,7 +1824,7 @@ classdef EPWM_AM263X < matlab.System & coder.ExternalDependency
     
     methods
         % Constructor
-        function obj = EPWM(varargin)
+        function obj = EPWM_AM263X(varargin)
             % Support name-value pair arguments when constructing the object.
             setProperties(obj,nargin,varargin{:});
         end
@@ -5637,7 +5693,282 @@ classdef EPWM_AM263X < matlab.System & coder.ExternalDependency
             ret = uint16(0);
         end     
     end
-end
+
+    function ret = get.DE_ModeEnum(obj)
+         if isequal(obj.DE_Mode, 'CBC Mode')
+             ret = uint16(0);
+         elseif isequal(obj.DE_Mode, 'OST Mode')
+             ret = uint16(1);
+         else
+             ret = uint16(0);
+         end
+    end
+
+    function ret = get.TRIPHEnum(obj)
+        if isequal(obj.TRIPH, 'Trip source is Input XBAR out0 signal')
+            ret = 0x01;
+        elseif isequal(obj.TRIPH, 'Trip source is Input XBAR out1 signal')
+            ret = 0x02;
+        elseif isequal(obj.TRIPH, 'Trip source is Input XBAR out2 signal')
+            ret = 0x03;
+        elseif isequal(obj.TRIPH, 'Trip source is Input XBAR out3 signal')
+            ret = 0x04;
+        elseif isequal(obj.TRIPH, 'Trip source is Input XBAR out4 signal')
+            ret = 0x05;
+        elseif isequal(obj.TRIPH, 'Trip source is Input XBAR out5 signal')
+            ret = 0x06;
+        elseif isequal(obj.TRIPH, 'Trip source is Input XBAR out6 signal')
+            ret = 0x07;
+        elseif isequal(obj.TRIPH, 'Trip source is Input XBAR out7 signal')
+            ret = 0x08;
+        elseif isequal(obj.TRIPH, 'Trip source is Input XBAR out8 signal')
+            ret = 0x09;
+        elseif isequal(obj.TRIPH, 'Trip source is Input XBAR out9 signal')
+            ret = 0x0A;
+        elseif isequal(obj.TRIPH, 'Trip source is Input XBAR out10 signal')
+            ret = 0x0B;
+        elseif isequal(obj.TRIPH, 'Trip source is Input XBAR out11 signal')
+            ret = 0x0C;
+        elseif isequal(obj.TRIPH, 'Trip source is Input XBAR out12 signal')
+            ret = 0x0D;
+        elseif isequal(obj.TRIPH, 'Trip source is Input XBAR out13 signal')
+            ret = 0x0E;
+        elseif isequal(obj.TRIPH, 'Trip source is Input XBAR out14 signal')
+            ret = 0x0F;
+        elseif isequal(obj.TRIPH, 'Trip source is Input XBAR out15 signal')
+            ret = 0x10;
+        elseif isequal(obj.TRIPH, 'Trip source is Input XBAR out16 signal')
+            ret = 0x11;
+        elseif isequal(obj.TRIPH, 'Trip source is Input XBAR out17 signal')
+            ret = 0x12;
+        elseif isequal(obj.TRIPH, 'Trip source is Input XBAR out18 signal')
+            ret = 0x13;
+        elseif isequal(obj.TRIPH, 'Trip source is Input XBAR out19 signal')
+            ret = 0x14;
+        elseif isequal(obj.TRIPH, 'Trip source is Input XBAR out20 signal')
+            ret = 0x15;
+        elseif isequal(obj.TRIPH, 'Trip source is Input XBAR out21 signal')
+            ret = 0x16;
+        elseif isequal(obj.TRIPH, 'Trip source is Input XBAR out22 signal')
+            ret = 0x17;
+        elseif isequal(obj.TRIPH, 'Trip source is Input XBAR out23 signal')
+            ret = 0x18;
+        elseif isequal(obj.TRIPH, 'Trip source is Input XBAR out24 signal')
+            ret = 0x19;
+        elseif isequal(obj.TRIPH, 'Trip source is Input XBAR out25 signal')
+            ret = 0x1A;
+        elseif isequal(obj.TRIPH, 'Trip source is Input XBAR out26 signal')
+            ret = 0x1B;
+        elseif isequal(obj.TRIPH, 'Trip source is Input XBAR out27 signal')
+            ret = 0x1C;
+        elseif isequal(obj.TRIPH, 'Trip source is Input XBAR out28 signal')
+            ret = 0x1D;
+        elseif isequal(obj.TRIPH, 'Trip source is Input XBAR out29 signal')
+            ret = 0x1E;
+        elseif isequal(obj.TRIPH, 'Trip source is Input XBAR out30 signal')
+            ret = 0x1F;
+        elseif isequal(obj.TRIPH, 'Trip source is Input XBAR out31 signal')
+            ret = 0x20;
+        elseif isequal(obj.TRIPH, 'Trip source is CMPSSA0 signal')
+            ret = 0x21;
+        elseif isequal(obj.TRIPH, 'Trip source is CMPSSA1 signal')
+            ret = 0x22;
+        elseif isequal(obj.TRIPH, 'Trip source is CMPSSA2 signal')
+            ret = 0x23;
+        elseif isequal(obj.TRIPH, 'Trip source is CMPSSA3 signal')
+            ret = 0x24;
+        elseif isequal(obj.TRIPH, 'Trip source is CMPSSA4 signal')
+            ret = 0x25;
+        elseif isequal(obj.TRIPH, 'Trip source is CMPSSA5 signal')
+            ret = 0x26;
+        elseif isequal(obj.TRIPH, 'Trip source is CMPSSA6 signal')
+            ret = 0x27;
+        elseif isequal(obj.TRIPH, 'Trip source is CMPSSA7 signal')
+            ret = 0x28;
+        elseif isequal(obj.TRIPH, 'Trip source is CMPSSA8 signal')
+            ret = 0x29;
+        elseif isequal(obj.TRIPH, 'Trip source is CMPSSA9 signal')
+            ret = 0x2A;
+        elseif isequal(obj.TRIPH, 'Trip source is CMPSSB0 signal')
+            ret = 0x31;
+        elseif isequal(obj.TRIPH, 'Trip source is CMPSSB1 signal')
+            ret = 0x32;
+        elseif isequal(obj.TRIPH, 'Trip source is CMPSSB2 signal')
+            ret = 0x33;
+        elseif isequal(obj.TRIPH, 'Trip source is CMPSSB3 signal')
+            ret = 0x34;
+        elseif isequal(obj.TRIPH, 'Trip source is CMPSSB4 signal')
+            ret = 0x35;
+        elseif isequal(obj.TRIPH, 'Trip source is CMPSSB5 signal')
+            ret = 0x36;
+        elseif isequal(obj.TRIPH, 'Trip source is CMPSSB6 signal')
+            ret = 0x37;
+        elseif isequal(obj.TRIPH, 'Trip source is CMPSSB7 signal')
+            ret = 0x38;
+        elseif isequal(obj.TRIPH, 'Trip source is CMPSSB8 signal')
+            ret = 0x39;
+        elseif isequal(obj.TRIPH, 'Trip source is CMPSSB9 signal')
+            ret = 0x3A;
+        end
+    end
+
+    function ret = get.TRIPLEnum(obj)
+        if isequal(obj.TRIPL, 'Trip source is Input XBAR out0 signal')
+            ret = 0x01;
+        elseif isequal(obj.TRIPL, 'Trip source is Input XBAR out1 signal')
+            ret = 0x02;
+        elseif isequal(obj.TRIPL, 'Trip source is Input XBAR out2 signal')
+            ret = 0x03;
+        elseif isequal(obj.TRIPL, 'Trip source is Input XBAR out3 signal')
+            ret = 0x04;
+        elseif isequal(obj.TRIPL, 'Trip source is Input XBAR out4 signal')
+            ret = 0x05;
+        elseif isequal(obj.TRIPL, 'Trip source is Input XBAR out5 signal')
+            ret = 0x06;
+        elseif isequal(obj.TRIPL, 'Trip source is Input XBAR out6 signal')
+            ret = 0x07;
+        elseif isequal(obj.TRIPL, 'Trip source is Input XBAR out7 signal')
+            ret = 0x08;
+        elseif isequal(obj.TRIPL, 'Trip source is Input XBAR out8 signal')
+            ret = 0x09;
+        elseif isequal(obj.TRIPL, 'Trip source is Input XBAR out9 signal')
+            ret = 0x0A;
+        elseif isequal(obj.TRIPL, 'Trip source is Input XBAR out10 signal')
+            ret = 0x0B;
+        elseif isequal(obj.TRIPL, 'Trip source is Input XBAR out11 signal')
+            ret = 0x0C;
+        elseif isequal(obj.TRIPL, 'Trip source is Input XBAR out12 signal')
+            ret = 0x0D;
+        elseif isequal(obj.TRIPL, 'Trip source is Input XBAR out13 signal')
+            ret = 0x0E;
+        elseif isequal(obj.TRIPL, 'Trip source is Input XBAR out14 signal')
+            ret = 0x0F;
+        elseif isequal(obj.TRIPL, 'Trip source is Input XBAR out15 signal')
+            ret = 0x10;
+        elseif isequal(obj.TRIPL, 'Trip source is Input XBAR out16 signal')
+            ret = 0x11;
+        elseif isequal(obj.TRIPL, 'Trip source is Input XBAR out17 signal')
+            ret = 0x12;
+        elseif isequal(obj.TRIPL, 'Trip source is Input XBAR out18 signal')
+            ret = 0x13;
+        elseif isequal(obj.TRIPL, 'Trip source is Input XBAR out19 signal')
+            ret = 0x14;
+        elseif isequal(obj.TRIPL, 'Trip source is Input XBAR out20 signal')
+            ret = 0x15;
+        elseif isequal(obj.TRIPL, 'Trip source is Input XBAR out21 signal')
+            ret = 0x16;
+        elseif isequal(obj.TRIPL, 'Trip source is Input XBAR out22 signal')
+            ret = 0x17;
+        elseif isequal(obj.TRIPL, 'Trip source is Input XBAR out23 signal')
+            ret = 0x18;
+        elseif isequal(obj.TRIPL, 'Trip source is Input XBAR out24 signal')
+            ret = 0x19;
+        elseif isequal(obj.TRIPL, 'Trip source is Input XBAR out25 signal')
+            ret = 0x1A;
+        elseif isequal(obj.TRIPL, 'Trip source is Input XBAR out26 signal')
+            ret = 0x1B;
+        elseif isequal(obj.TRIPL, 'Trip source is Input XBAR out27 signal')
+            ret = 0x1C;
+        elseif isequal(obj.TRIPL, 'Trip source is Input XBAR out28 signal')
+            ret = 0x1D;
+        elseif isequal(obj.TRIPL, 'Trip source is Input XBAR out29 signal')
+            ret = 0x1E;
+        elseif isequal(obj.TRIPL, 'Trip source is Input XBAR out30 signal')
+            ret = 0x1F;
+        elseif isequal(obj.TRIPL, 'Trip source is Input XBAR out31 signal')
+            ret = 0x20;
+        elseif isequal(obj.TRIPL, 'Trip source is CMPSSA0 signal')
+            ret = 0x21;
+        elseif isequal(obj.TRIPL, 'Trip source is CMPSSA1 signal')
+            ret = 0x22;
+        elseif isequal(obj.TRIPL, 'Trip source is CMPSSA2 signal')
+            ret = 0x23;
+        elseif isequal(obj.TRIPL, 'Trip source is CMPSSA3 signal')
+            ret = 0x24;
+        elseif isequal(obj.TRIPL, 'Trip source is CMPSSA4 signal')
+            ret = 0x25;
+        elseif isequal(obj.TRIPL, 'Trip source is CMPSSA5 signal')
+            ret = 0x26;
+        elseif isequal(obj.TRIPL, 'Trip source is CMPSSA6 signal')
+            ret = 0x27;
+        elseif isequal(obj.TRIPL, 'Trip source is CMPSSA7 signal')
+            ret = 0x28;
+        elseif isequal(obj.TRIPL, 'Trip source is CMPSSA8 signal')
+            ret = 0x29;
+        elseif isequal(obj.TRIPL, 'Trip source is CMPSSA9 signal')
+            ret = 0x2A;
+        elseif isequal(obj.TRIPL, 'Trip source is CMPSSB0 signal')
+            ret = 0x31;
+        elseif isequal(obj.TRIPL, 'Trip source is CMPSSB1 signal')
+            ret = 0x32;
+        elseif isequal(obj.TRIPL, 'Trip source is CMPSSB2 signal')
+            ret = 0x33;
+        elseif isequal(obj.TRIPL, 'Trip source is CMPSSB3 signal')
+            ret = 0x34;
+        elseif isequal(obj.TRIPL, 'Trip source is CMPSSB4 signal')
+            ret = 0x35;
+        elseif isequal(obj.TRIPL, 'Trip source is CMPSSB5 signal')
+            ret = 0x36;
+        elseif isequal(obj.TRIPL, 'Trip source is CMPSSB6 signal')
+            ret = 0x37;
+        elseif isequal(obj.TRIPL, 'Trip source is CMPSSB7 signal')
+            ret = 0x38;
+        elseif isequal(obj.TRIPL, 'Trip source is CMPSSB8 signal')
+            ret = 0x39;
+        elseif isequal(obj.TRIPL, 'Trip source is CMPSSB9 signal')
+            ret = 0x3A;
+        end
+    end
+
+    function ret = get.TRIP_ChannelAEnum(obj)
+        if isequal(obj.TRIP_ChannelA, 'TRIPL')
+            ret = 0x1;
+        elseif isequal(obj.TRIP_ChannelA, 'TRIPH')
+            ret = 0x0;
+        else
+            ret = 0x0;
+        end
+    end
+
+    function ret = get.PWMA_Signal_DE_ModeEnum(obj)
+        if isequal(obj.PWMA_Signal_DE_Mode, 'Synchronized version of TRIP signal')
+            ret = 0x00;
+        elseif isequal(obj.PWMA_Signal_DE_Mode, 'Synchronized and inverted version of TRIP signal')
+            ret = 0x01;
+        elseif isequal(obj.PWMA_Signal_DE_Mode, 'Constant LOW signal')
+            ret = 0x10;
+        elseif isequal(obj.PWMA_Signal_DE_Mode, 'Constant HIGH signal')
+            ret = 0x11;
+        else
+            ret = 0x00;
+        end
+    end
+
+    function ret = get.TRIP_ChannelBEnum(obj)
+        if isequal(obj.TRIP_ChannelB, 'TRIPL')
+            ret = 0x1;
+        elseif isequal(obj.TRIP_ChannelB, 'TRIPH')
+            ret = 0x0;
+        else
+            ret = 0x0;
+        end
+    end
+
+    function ret = get.PWMB_Signal_DE_ModeEnum(obj)
+        if isequal(obj.PWMB_Signal_DE_Mode, 'Synchronized version of TRIP signal')
+            ret = 0x00;
+        elseif isequal(obj.PWMB_Signal_DE_Mode, 'Synchronized and inverted version of TRIP signal')
+            ret = 0x01;
+        elseif isequal(obj.PWMB_Signal_DE_Mode, 'Constant LOW signal')
+            ret = 0x10;
+        elseif isequal(obj.PWMB_Signal_DE_Mode, 'Constant HIGH signal')
+            ret = 0x11;
+        else
+            ret = 0x00;
+        end
+    end    
+
+    end
 
      methods (Static, Access=protected)
 
@@ -5717,9 +6048,12 @@ end
                 'EPWMXA_tbctr_XCMP1_SHADOW3', 'EPWMXA_tbctr_XCMP2_SHADOW3', 'EPWMXA_tbctr_XCMP3_SHADOW3', 'EPWMXA_tbctr_XCMP4_SHADOW3', 'EPWMXA_tbctr_XCMP5_SHADOW3', 'EPWMXA_tbctr_XCMP6_SHADOW3', 'EPWMXA_tbctr_XCMP7_SHADOW3', 'EPWMXA_tbctr_XCMP8_SHADOW3', 'EPWMXB_tbctr_XCMP5_SHADOW3', 'EPWMXB_tbctr_XCMP6_SHADOW3', 'EPWMXB_tbctr_XCMP7_SHADOW3', 'EPWMXB_tbctr_XCMP8_SHADOW3', ...
                 'XMIN_Active', 'XMAX_Active', 'XMIN_Shadow1', 'XMAX_Shadow1', 'XMIN_Shadow2', 'XMAX_Shadow2', 'XMIN_Shadow3', 'XMAX_Shadow3',  'XTBPRD_Active', 'XTBPRD_Shadow1', 'XTBPRD_Shadow2', 'XTBPRD_Shadow3',  'Load_Mode', 'Shadow_Level', 'Shadow_register_load_once', 'Repeat_Count_Shadow_Buffer2', 'Repeat_Count_Shadow_Buffer3'});
                 
+            DiodeEmulation = matlab.system.display.SectionGroup(...
+            'Title', 'Diode Emulation', ...
+            'PropertyList',  {'Enable_DE_Mode', 'DE_Mode', 'DE_Mode_Delay', 'TRIPH', 'TRIPL', 'TRIP_ChannelA', 'PWMA_Signal_DE_Mode', 'TRIP_ChannelB', 'PWMB_Signal_DE_Mode', 'Bypss_DEPWM_Generation', 'Force_DEACTIVE', 'Enable_Trip_Monitor_Mode', 'DE_Monitor_Mode_Threshold', 'Decrement_step_size', 'Increment_step_size'});
 
 
-            groups = [TimeBase, CounterCompare, ActionQualifier, TripZone, DigitalCompare, DeadBand, Chopper, EventTrigger, HRPWM, XCMP];
+            groups = [TimeBase, CounterCompare, ActionQualifier, TripZone, DigitalCompare, DeadBand, Chopper, EventTrigger, HRPWM, XCMP, DiodeEmulation];
 
             
         end  
@@ -6041,9 +6375,15 @@ end
                     end
                 end
 
+                %XCMP 
                 epwm_xcmp_struct = struct('base', obj.baseaddr, 'instance', obj.module_instance, 'enable_XCMP', obj.Enable_XCMP_Mode, 'enable_Split', obj.Enable_Split_XCMP, 'xcmp_cmpa', uint16(obj.Allocate_XCMP_CMPAEnum), 'xcmp_cmpb', uint16(obj.Allocate_XCMP_CMPBEnum), 'load_mode', uint16(obj.Load_ModeEnum), 'shadow_level', uint16(obj.Shadow_LevelEnum), 'shadow_register_load_once', uint16(obj.Shadow_register_load_onceEnum), 'rpt_cnt_shdw_buffer2', obj.Repeat_Count_Shadow_Buffer2, 'rpt_cnt_shdw_buffer3', obj.Repeat_Count_Shadow_Buffer3, 'xcmp1_active', uint16(obj.XCMP1_Active), 'xcmp2_active', uint16(obj.XCMP2_Active), 'xcmp3_active', uint16(obj.XCMP3_Active), 'xcmp4_active', uint16(obj.XCMP4_Active), 'xcmp5_active', uint16(obj.XCMP5_Active), 'xcmp6_active', uint16(obj.XCMP6_Active), 'xcmp7_active', uint16(obj.XCMP7_Active), 'xcmp8_active', uint16(obj.XCMP8_Active), 'xcmp1_shadow1', obj.XCMP1_SHADOW1, 'xcmp2_shadow1', obj.XCMP2_SHADOW1, 'xcmp3_shadow1', obj.XCMP3_SHADOW1, 'xcmp4_shadow1', obj.XCMP4_SHADOW1, 'xcmp5_shadow1', obj.XCMP5_SHADOW1, 'xcmp6_shadow1', obj.XCMP6_SHADOW1, 'xcmp7_shadow1', obj.XCMP7_SHADOW1, 'xcmp8_shadow1', obj.XCMP8_SHADOW1, 'xcmp1_shadow2', obj.XCMP1_SHADOW2, 'xcmp2_shadow2', obj.XCMP2_SHADOW2, 'xcmp3_shadow2', obj.XCMP3_SHADOW2, 'xcmp4_shadow2', obj.XCMP4_SHADOW2, 'xcmp5_shadow2', obj.XCMP5_SHADOW2, 'xcmp6_shadow2', obj.XCMP6_SHADOW2, 'xcmp7_shadow2', obj.XCMP7_SHADOW2, 'xcmp8_shadow2', obj.XCMP8_SHADOW2, 'xcmp1_shadow3', obj.XCMP1_SHADOW3, 'xcmp2_shadow3', obj.XCMP2_SHADOW3, 'xcmp3_shadow3', obj.XCMP3_SHADOW3, 'xcmp4_shadow3', obj.XCMP4_SHADOW3, 'xcmp5_shadow3', obj.XCMP5_SHADOW3, 'xcmp6_shadow3', obj.XCMP6_SHADOW3, 'xcmp7_shadow3', obj.XCMP7_SHADOW3, 'xcmp8_shadow3', obj.XCMP8_SHADOW3, 'xtbprd_active', obj.XTBPRD_Active, 'xtbprd_shadow1', obj.XTBPRD_Shadow1, 'xtbprd_shadow2', obj.XTBPRD_Shadow2, 'xtbprd_shadow3', obj.XTBPRD_Shadow3, 'xmin_active', obj.XMIN_Active, 'xmax_active', obj.XMAX_Active, 'xmin_shadow1', obj.XMIN_Shadow1, 'xmax_shadow1', obj.XMAX_Shadow1, 'xmin_shadow2', obj.XMIN_Shadow2, 'xmax_shadow2', obj.XMAX_Shadow2, 'xmin_shadow3', obj.XMIN_Shadow3, 'xmax_shadow3', obj.XMAX_Shadow3, 'epwmxa_tbctr_xcmp1_active', uint16(obj.EPWMXA_tbctr_XCMP1_activeEnum), 'epwmxa_tbctr_xcmp2_active', uint16(obj.EPWMXA_tbctr_XCMP2_activeEnum), 'epwmxa_tbctr_xcmp3_active', uint16(obj.EPWMXA_tbctr_XCMP3_activeEnum), 'epwmxa_tbctr_xcmp4_active', uint16(obj.EPWMXA_tbctr_XCMP4_activeEnum), 'epwmxa_tbctr_xcmp5_active', uint16(obj.EPWMXA_tbctr_XCMP5_activeEnum), 'epwmxa_tbctr_xcmp6_active', uint16(obj.EPWMXA_tbctr_XCMP6_activeEnum), 'epwmxa_tbctr_xcmp7_active', uint16(obj.EPWMXA_tbctr_XCMP7_activeEnum), 'epwmxa_tbctr_xcmp8_active', uint16(obj.EPWMXA_tbctr_XCMP8_activeEnum), 'epwmxb_tbctr_xcmp5_active', uint16(obj.EPWMXB_tbctr_XCMP5_activeEnum), 'epwmxb_tbctr_xcmp6_active', uint16(obj.EPWMXB_tbctr_XCMP6_activeEnum), 'epwmxb_tbctr_xcmp7_active', uint16(obj.EPWMXB_tbctr_XCMP7_activeEnum), 'epwmxb_tbctr_xcmp8_active', uint16(obj.EPWMXB_tbctr_XCMP8_activeEnum), 'epwmxa_tbctr_xcmp1_shadow1', uint16(obj.EPWMXA_tbctr_XCMP1_SHADOW1Enum), 'epwmxa_tbctr_xcmp2_shadow1', uint16(obj.EPWMXA_tbctr_XCMP2_SHADOW1Enum), 'epwmxa_tbctr_xcmp3_shadow1', uint16(obj.EPWMXA_tbctr_XCMP3_SHADOW1Enum), 'epwmxa_tbctr_xcmp4_shadow1', uint16(obj.EPWMXA_tbctr_XCMP4_SHADOW1Enum), 'epwmxa_tbctr_xcmp5_shadow1', uint16(obj.EPWMXA_tbctr_XCMP5_SHADOW1Enum), 'epwmxa_tbctr_xcmp6_shadow1', uint16(obj.EPWMXA_tbctr_XCMP6_SHADOW1Enum), 'epwmxa_tbctr_xcmp7_shadow1', uint16(obj.EPWMXA_tbctr_XCMP7_SHADOW1Enum), 'epwmxa_tbctr_xcmp8_shadow1', uint16(obj.EPWMXA_tbctr_XCMP8_SHADOW1Enum), 'epwmxb_tbctr_xcmp5_shadow1', uint16(obj.EPWMXB_tbctr_XCMP5_SHADOW1Enum), 'epwmxb_tbctr_xcmp6_shadow1', uint16(obj.EPWMXB_tbctr_XCMP6_SHADOW1Enum), 'epwmxb_tbctr_xcmp7_shadow1', uint16(obj.EPWMXB_tbctr_XCMP7_SHADOW1Enum), 'epwmxb_tbctr_xcmp8_shadow1', uint16(obj.EPWMXB_tbctr_XCMP8_SHADOW1Enum), 'epwmxa_tbctr_xcmp1_shadow2', uint16(obj.EPWMXA_tbctr_XCMP1_SHADOW2Enum), 'epwmxa_tbctr_xcmp2_shadow2', uint16(obj.EPWMXA_tbctr_XCMP2_SHADOW2Enum), 'epwmxa_tbctr_xcmp3_shadow2', uint16(obj.EPWMXA_tbctr_XCMP3_SHADOW2Enum), 'epwmxa_tbctr_xcmp4_shadow2', uint16(obj.EPWMXA_tbctr_XCMP4_SHADOW2Enum), 'epwmxa_tbctr_xcmp5_shadow2', uint16(obj.EPWMXA_tbctr_XCMP5_SHADOW2Enum), 'epwmxa_tbctr_xcmp6_shadow2', uint16(obj.EPWMXA_tbctr_XCMP6_SHADOW2Enum), 'epwmxa_tbctr_xcmp7_shadow2', uint16(obj.EPWMXA_tbctr_XCMP7_SHADOW2Enum), 'epwmxa_tbctr_xcmp8_shadow2', uint16(obj.EPWMXA_tbctr_XCMP8_SHADOW2Enum), 'epwmxb_tbctr_xcmp5_shadow2', uint16(obj.EPWMXB_tbctr_XCMP5_SHADOW2Enum), 'epwmxb_tbctr_xcmp6_shadow2', uint16(obj.EPWMXB_tbctr_XCMP6_SHADOW2Enum), 'epwmxb_tbctr_xcmp7_shadow2', uint16(obj.EPWMXB_tbctr_XCMP7_SHADOW2Enum), 'epwmxb_tbctr_xcmp8_shadow2', uint16(obj.EPWMXB_tbctr_XCMP8_SHADOW2Enum), 'epwmxa_tbctr_xcmp1_shadow3', uint16(obj.EPWMXA_tbctr_XCMP1_SHADOW3Enum), 'epwmxa_tbctr_xcmp2_shadow3', uint16(obj.EPWMXA_tbctr_XCMP2_SHADOW3Enum), 'epwmxa_tbctr_xcmp3_shadow3', uint16(obj.EPWMXA_tbctr_XCMP3_SHADOW3Enum), 'epwmxa_tbctr_xcmp4_shadow3', uint16(obj.EPWMXA_tbctr_XCMP4_SHADOW3Enum), 'epwmxa_tbctr_xcmp5_shadow3', uint16(obj.EPWMXA_tbctr_XCMP5_SHADOW3Enum), 'epwmxa_tbctr_xcmp6_shadow3', uint16(obj.EPWMXA_tbctr_XCMP6_SHADOW3Enum), 'epwmxa_tbctr_xcmp7_shadow3', uint16(obj.EPWMXA_tbctr_XCMP7_SHADOW3Enum), 'epwmxa_tbctr_xcmp8_shadow3', uint16(obj.EPWMXA_tbctr_XCMP8_SHADOW3Enum), 'epwmxb_tbctr_xcmp5_shadow3', uint16(obj.EPWMXB_tbctr_XCMP5_SHADOW3Enum), 'epwmxb_tbctr_xcmp6_shadow3', uint16(obj.EPWMXB_tbctr_XCMP6_SHADOW3Enum), 'epwmxb_tbctr_xcmp7_shadow3', uint16(obj.EPWMXB_tbctr_XCMP7_SHADOW3Enum), 'epwmxb_tbctr_xcmp8_shadow3', uint16(obj.EPWMXB_tbctr_XCMP8_SHADOW3Enum));
                 coder.cstructname(epwm_xcmp_struct, 'XCMPStruct', 'extern', 'HeaderFile', 'MW_EPWM.h');
                 coder.ceval('epwm_xcmp_setup', coder.ref(epwm_xcmp_struct));
+
+                %Diode Emulation
+                epwm_diode_emulation_struct = struct('base', obj.baseaddr, 'de_mode', obj.DE_ModeEnum, 'delay', uint8(obj.DE_Mode_Delay), 'decompsel_tripl', obj.TRIPLEnum, 'decompsel_triph', obj.TRIPHEnum, 'PWMA_Signal_DE_Mode', obj.PWMA_Signal_DE_ModeEnum, 'Trip_ChannelA', obj.TRIP_ChannelAEnum, 'PWMB_Signal_DE_Mode', obj.PWMB_Signal_DE_ModeEnum, 'Trip_ChannelB', obj.TRIP_ChannelBEnum, 'de_monitor_threshold', uint16(obj.DE_Monitor_Mode_Threshold), 'dec_step_size', uint8(obj.Decrement_step_size), 'inc_step_size', uint8(obj.Increment_step_size), 'Enable_DE_Mode', obj.Enable_DE_Mode, 'bypass_de_pwm', obj.Bypss_DEPWM_Generation, 'Force_DEACTIVE', obj.Force_DEACTIVE, 'Enable_Trip_Monitor', obj.Enable_Trip_Monitor_Mode);
+                coder.cstructname(epwm_diode_emulation_struct, 'DiodeEmulation_Struct', 'extern', 'HeaderFile', 'MW_EPWM.h');
+                coder.ceval('epwm_diode_emulation_setup', coder.ref(epwm_diode_emulation_struct));
             end
         end
         
@@ -6630,9 +6970,12 @@ end
                 flag = true;
             elseif((strcmp(propertyName, 'DCBLow_CombTrip1_Input') | strcmp(propertyName, 'DCBLow_CombTrip2_Input') | strcmp(propertyName, 'DCBLow_CombTrip3_Input') | strcmp(propertyName, 'DCBLow_CombTrip4_Input') | strcmp(propertyName, 'DCBLow_CombTrip5_Input') | strcmp(propertyName, 'DCBLow_CombTrip6_Input') | strcmp(propertyName, 'DCBLow_CombTrip7_Input') | strcmp(propertyName, 'DCBLow_CombTrip8_Input') | strcmp(propertyName, 'DCBLow_CombTrip9_Input') | strcmp(propertyName, 'DCBLow_CombTrip10_Input') | strcmp(propertyName, 'DCBLow_CombTrip11_Input') | strcmp(propertyName, 'DCBLow_CombTrip12_Input') | strcmp(propertyName, 'DCBLow_CombTrip13_Input') | strcmp(propertyName, 'DCBLow_CombTrip14_Input') | strcmp(propertyName, 'DCBLow_CombTrip15_Input')) && (~(isequal(obj.DCBLow, 'All Trips'))))
                 flag = true;
+            elseif((strcmp(propertyName, 'DE_Mode') | strcmp(propertyName, 'DE_Mode_Delay') | strcmp(propertyName, 'TRIPH') | strcmp(propertyName, 'TRIPL') | strcmp(propertyName, 'TRIP_ChannelA') | strcmp(propertyName, 'PWMA_Signal_DE_Mode') | strcmp(propertyName, 'TRIP_ChannelB') | strcmp(propertyName, 'PWMB_Signal_DE_Mode') | strcmp(propertyName, 'Bypss_DEPWM_Generation') | strcmp(propertyName, 'Force_DEACTIVE') | strcmp(propertyName, 'Enable_Trip_Monitor_Mode') | strcmp(propertyName, 'DE_Monitor_Mode_Threshold') | strcmp(propertyName, 'Decrement_step_size') | strcmp(propertyName, 'Increment_step_size')) && (obj.Enable_DE_Mode == false))
+                flag = true;
+            elseif((strcmp(propertyName, 'DE_Monitor_Mode_Threshold') | strcmp(propertyName, 'Decrement_step_size') | strcmp(propertyName, 'Increment_step_size')) && (obj.Enable_Trip_Monitor_Mode == false))
+                flag = true;
             else
-                flag = false;
-            
+                flag = false; 
             end
         end
 

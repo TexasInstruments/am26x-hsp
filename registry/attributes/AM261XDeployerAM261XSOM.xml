@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<productinfo version="3.0">
+  <name>AM261X Deployer</name>
+  <targetname>AM261X SOM</targetname>
+  <targetinitializationcall>am261x_HardwareInit_Fcn()</targetinitializationcall>
+  <pilinfo>
+    <Name>PIL on Serial</Name>
+    <Transport AvailableBaudrates="115200" AvailableCOMPorts="COM1" Baudrate="115200" COMPort="COM1" Type="serial">
+      <Name>PIL on Serial</Name>
+      <IOInterfaceName>PIL on Serial</IOInterfaceName>
+    </Transport>
+  </pilinfo>
+  <includefile>am261x_main.h</includefile>
+  <needsmainfcn>true</needsmainfcn>
+  <mainfcnsignature>int main(int argc, char **argv)</mainfcnsignature>
+  <token Name="ARMCORTEXR_ROOT_DIR" Value="matlabshared.target.am26x.getReferenceTargetRootFolder"/>
+  <onhardwareselecthook>am263x.onHardwareSelectHook</onhardwareselecthook>
+  <onaftercodegenhook>am263x.onAfterCodegenHookAM261x</onaftercodegenhook>
+  <profiler BufferName="profilingData" DataLength="50" InstantPrint="0" PrintData="1" StoreCoreId="1" TimerDataType="uint32" TimerReadFcn="profileReadTimer" TimerTicksPerS="1000000000" TimerUpcounting="1">
+    <Name>Profiler AM261x</Name>
+    <TimerSrcFile>$(TARGET_ROOT)/src/profiler_timer_am261x.c</TimerSrcFile>
+    <TimerIncludeFile>$(TARGE_ROOT)/include/profiler_timer_am261x.h</TimerIncludeFile>
+    <GetDataFcn>assert(false, Function not supported with this board)</GetDataFcn>
+  </profiler>
+  <detectoverrun>false</detectoverrun>
+  <honorruntimestoprequest>true</honorruntimestoprequest>
+  <sdcardinbackgroundtask>false</sdcardinbackgroundtask>
+  <includestdio>true</includestdio>
+  <enableoneclick>true</enableoneclick>
+  <externalmodeinfo closefcn="" connectfcn="" postdisconnecttargetfcn="" setupfcn="">
+    <name>XCP on Serial AM261</name>
+    <buildconfigurationinfofile>$(TARGET_ROOT)/registry/attributes/XCPonSerialAM261_ExternalModeBuildConfig.xml</buildconfigurationinfofile>
+    <preconnectfcn>pause(5);</preconnectfcn>
+    <transport availablebaudrates="NaN" type="serial">
+      <comport value="COM1">
+        <visible>true</visible>
+      </comport>
+      <baudrate value="115200">
+        <visible>true</visible>
+      </baudrate>
+      <verbose>
+        <value>false</value>
+        <visible>true</visible>
+      </verbose>
+      <availablecomports>COM1</availablecomports>
+      <name>XCP on Serial</name>
+      <iointerfacename>XCP on Serial AM261</iointerfacename>
+    </transport>
+    <task default="background">
+      <inbackground>true</inbackground>
+      <inforeground>false</inforeground>
+      <visible>false</visible>
+    </task>
+  </externalmodeinfo>
+  <buildconfigurationinfofile>$(TARGET_ROOT)/registry/attributes/AM261XDebugBuildConfiguration.xml</buildconfigurationinfofile>
+</productinfo>

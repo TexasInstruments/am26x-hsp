@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no" ?>
 <productinfo version="2.0">
   <name>AM261X LP</name>
-  <release>R2024b</release>
+  <release>R2025a</release>
   <baseproductid>4</baseproductid>
   <displayname>AM261X LP</displayname>
   <deviceid>ARM Cortex-R5F</deviceid>

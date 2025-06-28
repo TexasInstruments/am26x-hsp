@@ -12,7 +12,7 @@ isConfigSetCompatible = false;
 if configSet.isValidParam('CoderTargetData')
 data = getParam(configSet,'CoderTargetData');
 targetHardware = data.TargetHardware;
-hwSupportingPIL = { 'AM261X LP'  'AM263PX ControlCard'  'AM263PX LP'  'AM263X ControlCard'  'AM263X LP' };
+hwSupportingPIL = { 'AM261X LP'  'AM261X SOM'  'AM263PX ControlCard'  'AM263PX LP'  'AM263X ControlCard'  'AM263X LP' };
 for i=1:numel(hwSupportingPIL)
 if isequal(hwSupportingPIL{i},targetHardware)
 isConfigSetCompatible = true;

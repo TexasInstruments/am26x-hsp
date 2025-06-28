@@ -5,6 +5,7 @@ importPackage(Packages.java.io);
 
 ccxmlPath = arguments[0];
 binary = arguments[1];
+core = arguments[2];
 
 var script = ScriptingEnvironment.instance();
 script.traceWrite("Begin scripting session");
@@ -15,7 +16,7 @@ debugServer.setConfig(ccxmlPath);
 script.traceWrite("Config set");
 
 script.traceWrite("Connecting R50...");
-debugSession_r50 = debugServer.openSession(".*Cortex_R5_0*");
+debugSession_r50 = debugServer.openSession(core);
 debugSession_r50.target.connect();
 script.traceWrite("Connected");
 

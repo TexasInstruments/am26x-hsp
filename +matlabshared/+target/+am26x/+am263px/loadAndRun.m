@@ -27,10 +27,23 @@ executableFile = replace (executableFile , '\', '/');
 binaryPath = executableFile;
 disp(executableFile);
 dsspath = [ccsPath '/ccs/ccs_base/scripting/bin/']
+hCS=getActiveConfigSet(bdroot) 
+coreSelected = codertarget.data.getParameterValue(hCS, 'CpuInfo.CoreSelection') 
+
 LoadJSpath = [thisFilePath '/openSession.js']
 
 dssBatFile = [dsspath 'dss.bat']
-commandStr = [dssBatFile ' ' LoadJSpath ' ' ccxmlPath ' ' binaryPath ] 
+
+if(strcmp(coreSelected,'Core0'))
+    commandStr = [dssBatFile ' ' LoadJSpath ' ' ccxmlPath ' ' binaryPath ' ' '".*Cortex_R5_0*"'] 
+elseif(strcmp(coreSelected,'Core1'))
+    commandStr = [dssBatFile ' ' LoadJSpath ' ' ccxmlPath ' ' binaryPath ' ' '".*Cortex_R5_1*"'] 
+elseif(strcmp(coreSelected,'Core2'))
+    commandStr = [dssBatFile ' ' LoadJSpath ' ' ccxmlPath ' ' binaryPath ' ' '".*Cortex_R5_2*"']
+elseif(strcmp(coreSelected,'Core3'))
+    commandStr = [dssBatFile ' ' LoadJSpath ' ' ccxmlPath ' ' binaryPath ' ' '".*Cortex_R5_3*"'] 
+end
+
 system(commandStr); 
 
 

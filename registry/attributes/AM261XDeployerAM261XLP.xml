@@ -15,6 +15,13 @@
   <mainfcnsignature>int main(int argc, char **argv)</mainfcnsignature>
   <token Name="ARMCORTEXR_ROOT_DIR" Value="matlabshared.target.am26x.getReferenceTargetRootFolder"/>
   <onhardwareselecthook>am263x.onHardwareSelectHook</onhardwareselecthook>
+  <onaftercodegenhook>am263x.onAfterCodegenHookAM261x</onaftercodegenhook>
+  <profiler BufferName="profilingData" DataLength="50" InstantPrint="0" PrintData="1" StoreCoreId="1" TimerDataType="uint32" TimerReadFcn="profileReadTimer" TimerTicksPerS="1000000000" TimerUpcounting="1">
+    <Name>Profiler AM261x</Name>
+    <TimerSrcFile>$(TARGET_ROOT)/src/profiler_timer_am261x.c</TimerSrcFile>
+    <TimerIncludeFile>$(TARGE_ROOT)/include/profiler_timer_am261x.h</TimerIncludeFile>
+    <GetDataFcn>assert(false, Function not supported with this board)</GetDataFcn>
+  </profiler>
   <detectoverrun>false</detectoverrun>
   <honorruntimestoprequest>true</honorruntimestoprequest>
   <sdcardinbackgroundtask>false</sdcardinbackgroundtask>

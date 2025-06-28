@@ -1,3 +1,36 @@
+/********************************************************************
+ * Copyright (C) 2025 Texas Instruments Incorporated.
+ *
+ *  Redistribution and use in source and binary forms, with or without
+ *  modification, are permitted provided that the following conditions
+ *  are met:
+ *
+ *    Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer.
+ *
+ *    Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in the
+ *    documentation and/or other materials provided with the
+ *    distribution.
+ *
+ *    Neither the name of Texas Instruments Incorporated nor the names of
+ *    its contributors may be used to endorse or promote products derived
+ *    from this software without specific prior written permission.
+ *
+ *  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+ *  "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+ *  LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+ *  A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+ *  OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ *  SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+ *  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+ *  DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+ *  THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+ *  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+ *  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ *
+
+*/
 #ifndef EPWM_MW_H_
 #define EPWM_MW_H_
 #include <stdint.h>
@@ -556,6 +589,85 @@ typedef struct{
 }XCMPStruct;
 
 typedef struct{
+
+    uint32_t base;
+    EPWM_DiodeEmulationMode de_mode;
+    uint8_t delay;
+    EPWM_DiodeEmulationTripSource decompsel_tripl;
+    EPWM_DiodeEmulationTripSource decompsel_triph;
+    uint32_t PWMA_Signal_DE_Mode;
+    EPWM_DiodeEmulationSignal Trip_ChannelA;
+    uint32_t PWMB_Signal_DE_Mode;
+    EPWM_DiodeEmulationSignal Trip_ChannelB;
+    uint16_t de_monitor_threshold;
+    uint8_t dec_step_size;
+    uint8_t inc_step_size;
+    bool Enable_DE_Mode;
+    bool bypass_de_pwm;
+    bool Force_DEACTIVE;
+    bool Enable_Trip_Monitor;
+
+}DiodeEmulation_Struct;
+
+typedef struct{
+
+    uint32_t base;
+    bool enable_MDLA;
+    uint32_t Ref_signal_MDLA;
+    uint32_t Invert_RefSignal_BlockA;
+    uint32_t Delay_PWMA;
+    uint32_t Blocking_signal_PWMA;
+    uint32_t Blocking_signal_AND_OR_PWMA;
+    bool Enable_MDLB;
+    uint32_t Ref_signal_MDLB;
+    uint32_t Invert_Ref_signal_BlockB;
+    uint32_t Delay_PWMB;
+    uint32_t Blocking_signal_PWMB;
+    uint32_t Blocking_signal_AND_OR_PWMB;
+
+}MinimumDeadband_Struct;
+
+typedef struct{
+
+    uint32_t base; 
+    bool enable_iclA;
+    uint32_t IN3_BlockA;
+    uint32_t BlockA000;
+    uint32_t BlockA001;
+    uint32_t BlockA010;
+    uint32_t BlockA011;
+    uint32_t BlockA100;
+    uint32_t BlockA101;
+    uint32_t BlockA110;
+    uint32_t BlockA111;
+    bool enable_iclB;
+    uint32_t IN3_blockB;
+    uint32_t BlockB000;
+    uint32_t BlockB001;
+    uint32_t BlockB010;
+    uint32_t BlockB011;
+    uint32_t BlockB100;
+    uint32_t BlockB101;
+    uint32_t BlockB110;
+    uint32_t BlockB111;
+
+}IllegalComboLogic_Struct;
+
+typedef struct{
+
+    uint32_t base; 
+    uint32_t instance;
+    bool EnableGlobalShadowtoActiveLoad;
+    EPWM_GlobalLoadTrigger GlobalLoadPulseSelection;
+    uint16_t GlobalLoadStrobePeriod;
+    bool EnableOneShot;
+    bool EnableReloadOneShotMode;
+    bool EnableForceLoadEvent;
+    EPWM_CurrentLink CurrentLink;
+
+}GlobalLoad_Struct;
+
+typedef struct{
     uint32_t base;  
     EPWM_TimeBaseCountMode counterMode; 
     bool phaseShiftLoadEnable; 
@@ -602,6 +714,14 @@ extern void
 epwm_hrpwm_setup(HRPWMStruct *ptr);
 extern void
 epwm_xcmp_setup(XCMPStruct *ptr);
+extern void
+epwm_diode_emulation_setup(DiodeEmulation_Struct *ptr);
+extern void
+epwm_minimum_deadband_setup(MinimumDeadband_Struct *ptr);
+extern void
+epwm_illegal_combo_logic_setup(IllegalComboLogic_Struct *ptr);
+extern void
+epwm_global_load_setup(GlobalLoad_Struct *ptr);
 extern void
 epwm_step(EPWMStepStruct *ptr);
 extern void

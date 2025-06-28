@@ -88,7 +88,8 @@ classdef ConnectivityConfig < rtw.connectivity.Config
             % Optionally, you can register a hardware-specific timer. Registering a timer
             % enables the code execution profiling feature. In this example
             % implementation, we use a timer for the host platform.
-            timer = coder.profile.crlHostTimer();
+            
+            timer = codertarget.arm_cortex_r.pil.profilingTimer(1000000000);
             this.setTimer(timer);
             
         end

@@ -1,0 +1,91 @@
+%% Abstract:
+%%      TLC file for the HWI Block.
+%%
+
+
+%implements "IPC_HWI" "C"
+
+%include "r5lib.tlc"
+
+%% Function: BlockInstanceSetup ================================================
+%% Abstract:
+%%      Setup ISR function names. Warn if output not connected.
+%%
+%function BlockInstanceSetup(block, system) void
+ 
+    %if LibIsEqual(SFcnSystemOutputCall[0].BlockToCall, "unconnected")
+      %% The element is not connected to anything
+      %assign wrnTxt = "No code will be generated for ISR %<number> "\
+      "since it is not connected to a system."
+      %<LibReportWarning(wrnTxt)>
+    %endif
+     
+%endfunction
+      
+%% Function: Outputs ===========================================================
+%% Abstract:
+%%      Create the ISR function.
+%%
+%function Outputs(block, system) Output
+   
+    %assign callIdx = 0
+    %% Get the downstream block
+    %assign ssBlock = LibGetFcnCallBlock(block,callIdx)
+
+    %% Call the downstream f-c subsystem, it can inline
+    %openfile tmpBuf
+    %<LibBlockExecuteFcnCall(block, callIdx)>\
+    %closefile tmpBuf
+    %% Alwarys create the ISR function
+
+    %%assign isr_number =  CAST("Number",SFcnParamSettings.ISR_NUMBER[0])
+    %%assign instance_number =  CAST("Number",SFcnParamSettings.INSTANCE_NUMBER[0])
+
+   
+    
+    
+    %openfile funcbuf
+    /* ISR : '%<Name>' */
+    
+    
+    void  ti_sitara_ipc_isr()
+    {
+
+ 
+         %% intr_type 0 is adc interrupt
+         %%ti_sitara_%<intr_type>_intr_pre_code(%<instance_number>);
+
+
+	/* Call the system: '%<ssBlock.Name>' */
+        %<tmpBuf>
+
+  
+         %%ti_sitara_%<intr_type>_intr_post_code(%<instance_number>);
+	   
+    }
+    
+    %closefile funcbuf
+    %assign srcFile = LibGetModelDotCFile()
+    %<LibSetSourceFileSection(srcFile, "Functions", funcbuf)>
+%endfunction
+
+%% Function: Start =============================================================
+%% Abstract:
+%%      Connect and enable each ISR in the model's start function.
+%%
+%function Start(block, system) Output
+    %%assign isr_number=  CAST("Number",SFcnParamSettings.ISR_NUMBER[0])
+    %%assign instance_number=  CAST("Number",SFcnParamSettings.INSTANCE_NUMBER[0])
+
+    %%interrupt_setup(%<isr_number>, %<instance_number>,  ti_sitara_isr_%<isr_number>);
+%endfunction
+
+%% Function: Terminate =========================================================
+%% Abstract:
+%%      Disable each ISR in the model's terminate function.
+%%
+%function Terminate(block, system) Output
+   
+%endfunction
+
+%% [EOF] HWI.tlc

@@ -1,4 +1,36 @@
+/********************************************************************
+ * Copyright (C) 2025 Texas Instruments Incorporated.
+ *
+ *  Redistribution and use in source and binary forms, with or without
+ *  modification, are permitted provided that the following conditions
+ *  are met:
+ *
+ *    Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer.
+ *
+ *    Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in the
+ *    documentation and/or other materials provided with the
+ *    distribution.
+ *
+ *    Neither the name of Texas Instruments Incorporated nor the names of
+ *    its contributors may be used to endorse or promote products derived
+ *    from this software without specific prior written permission.
+ *
+ *  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+ *  "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+ *  LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+ *  A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+ *  OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ *  SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+ *  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+ *  DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+ *  THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+ *  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+ *  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ *
 
+*/
 
 #include "MW_EPWM.h"
 
@@ -25,7 +57,8 @@ void epwm_timebase_setup(TimeBaseStruct *ptr)
     EPWM_selectPeriodLoadEvent(ptr->base, ptr->periodShadowLoadMode);
     EPWM_setTimeBaseCounter(ptr->base, ptr->timeBaseCountValue);
     EPWM_setTimeBaseCounterMode(ptr->base, ptr->counterMode);
-   
+
+    // EPWM_setCountModeAfterSync(ptr->base, EPWM_COUNT_MODE_DOWN_AFTER_SYNC);
     if(ptr->phaseShiftLoadEnable == true)
     {
         
@@ -57,6 +90,9 @@ void epwm_timebase_setup(TimeBaseStruct *ptr)
     EPWM_enableSyncOutPulseSource(ptr->base, mask);
     EPWM_setSyncInPulseSource(ptr->base, ptr->syncInPulseSource);
     EPWM_setOneShotSyncOutTrigger(ptr->base, ptr->oneShotTrigger);
+
+    
+	
 }
 	
 void epwm_counter_compare_setup(CounterCompareStruct *ptr)
@@ -1148,8 +1184,160 @@ void epwm_xcmp_setup(XCMPStruct *ptr)
     if(ptr->shadow_level!=0)
         EPWM_enableXLoad(ptr->base);
  
-    SOC_setEpwmTbClk(ptr->instance, true);
+    #ifdef SOC_AM263X
+        SOC_setEpwmTbClk(ptr->instance, true);
+    #endif
+
+    #ifdef SOC_AM261X
+        SOC_setEpwmTbClk(ptr->instance, true);
+    #endif
     
+}
+
+void epwm_diode_emulation_setup(DiodeEmulation_Struct *ptr)
+{
+
+    if(ptr->Enable_DE_Mode)
+    {
+        EPWM_enableDiodeEmulationMode(ptr->base);
+        EPWM_setDiodeEmulationMode(ptr->base, ptr->de_mode);
+        EPWM_setDiodeEmulationReentryDelay(ptr->base, ptr->delay);
+        EPWM_configureDiodeEmulationTripSources(ptr->base, ptr->decompsel_tripl, EPWM_DE_TRIPL);
+        EPWM_configureDiodeEmulationTripSources(ptr->base, ptr->decompsel_triph, EPWM_DE_TRIPH);    
+        EPWM_selectDiodeEmulationPWMsignal(ptr->base, EPWM_DE_CHANNEL_A, ptr->PWMA_Signal_DE_Mode);
+        EPWM_selectDiodeEmulationTripSignal(ptr->base, EPWM_DE_CHANNEL_A, ptr->Trip_ChannelA);
+        EPWM_selectDiodeEmulationPWMsignal(ptr->base, EPWM_DE_CHANNEL_B, ptr->PWMB_Signal_DE_Mode);
+        EPWM_selectDiodeEmulationTripSignal(ptr->base, EPWM_DE_CHANNEL_B, ptr->Trip_ChannelB);
+        if(ptr->bypass_de_pwm)
+            EPWM_bypassDiodeEmulationLogic(ptr->base);
+        else
+            EPWM_nobypassDiodeEmulationLogic(ptr->base);
+        if(ptr->Force_DEACTIVE)
+            EPWM_forceDiodeEmulationActive(ptr->base);
+        if(ptr->Enable_Trip_Monitor)
+        {
+            EPWM_enableDiodeEmulationMonitorModeControl(ptr->base);
+            EPWM_setDiodeEmulationMonitorCounterThreshold(ptr->base, ptr->de_monitor_threshold);
+            EPWM_setDiodeEmulationMonitorModeStep(ptr->base, EPWM_DE_COUNT_DOWN, ptr->dec_step_size);
+            EPWM_setDiodeEmulationMonitorModeStep(ptr->base, EPWM_DE_COUNT_UP, ptr->inc_step_size);
+        }
+        else
+            EPWM_disableDiodeEmulationMonitorModeControl(ptr->base);
+           
+    }
+    else
+    {
+            EPWM_disableDiodeEmulationMode(ptr->base);
+    }
+}
+
+void epwm_minimum_deadband_setup(MinimumDeadband_Struct *ptr)
+{
+
+    if(ptr->enable_MDLA)
+    {
+        EPWM_enableMinimumDeadBand(ptr->base, EPWM_MINDB_BLOCK_A);
+        EPWM_selectMinimumDeadBandReferenceSignal(ptr->base, EPWM_MINDB_BLOCK_A, ptr->Ref_signal_MDLA);
+        EPWM_invertMinimumDeadBandSignal(ptr->base, EPWM_MINDB_BLOCK_A, ptr->Invert_RefSignal_BlockA);
+        EPWM_setMinDeadBandDelay(ptr->base, EPWM_MINDB_BLOCK_A, ptr->Delay_PWMA);
+        EPWM_selectMinimumDeadBandBlockingSignal(ptr->base, EPWM_MINDB_BLOCK_A, ptr->Blocking_signal_PWMA);
+        EPWM_selectMinimumDeadBandAndOrLogic(ptr->base, EPWM_MINDB_BLOCK_A, ptr->Blocking_signal_AND_OR_PWMA);
+    }
+    else
+    {
+        EPWM_disableMinimumDeadBand(ptr->base, EPWM_MINDB_BLOCK_A);
+    }
+
+    if(ptr->Enable_MDLB)
+    {
+        EPWM_enableMinimumDeadBand(ptr->base, EPWM_MINDB_BLOCK_B);
+        EPWM_selectMinimumDeadBandReferenceSignal(ptr->base, EPWM_MINDB_BLOCK_B, ptr->Ref_signal_MDLB);
+        EPWM_invertMinimumDeadBandSignal(ptr->base, EPWM_MINDB_BLOCK_B, ptr->Invert_Ref_signal_BlockB);
+        EPWM_setMinDeadBandDelay(ptr->base, EPWM_MINDB_BLOCK_B, ptr->Delay_PWMB);
+        EPWM_selectMinimumDeadBandBlockingSignal(ptr->base, EPWM_MINDB_BLOCK_B, ptr->Blocking_signal_PWMB);
+        EPWM_selectMinimumDeadBandAndOrLogic(ptr->base, EPWM_MINDB_BLOCK_B, ptr->Blocking_signal_AND_OR_PWMB);
+    }
+    else
+    {
+        EPWM_disableMinimumDeadBand(ptr->base, EPWM_MINDB_BLOCK_B);
+    }
+
+}
+
+void epwm_illegal_combo_logic_setup(IllegalComboLogic_Struct *ptr)
+{
+    if(ptr->enable_iclA)
+    {
+        EPWM_enableIllegalComboLogic(ptr->base, EPWM_MINDB_BLOCK_A);
+        EPWM_selectXbarInput(ptr->base, EPWM_MINDB_BLOCK_A, ptr->IN3_BlockA);
+        EPWM_setLutDecX(ptr->base, EPWM_MINDB_BLOCK_A, 0, ptr->BlockA000);
+        EPWM_setLutDecX(ptr->base, EPWM_MINDB_BLOCK_A, 1, ptr->BlockA001);
+        EPWM_setLutDecX(ptr->base, EPWM_MINDB_BLOCK_A, 2, ptr->BlockA010);
+        EPWM_setLutDecX(ptr->base, EPWM_MINDB_BLOCK_A, 3, ptr->BlockA011);
+        EPWM_setLutDecX(ptr->base, EPWM_MINDB_BLOCK_A, 4, ptr->BlockA100);
+        EPWM_setLutDecX(ptr->base, EPWM_MINDB_BLOCK_A, 5, ptr->BlockA101);
+        EPWM_setLutDecX(ptr->base, EPWM_MINDB_BLOCK_A, 6, ptr->BlockA110);
+        EPWM_setLutDecX(ptr->base, EPWM_MINDB_BLOCK_A, 7, ptr->BlockA111);
+    }
+    else
+    {
+        EPWM_disableIllegalComboLogic(ptr->base, EPWM_MINDB_BLOCK_A);
+    }
+
+    if(ptr->enable_iclB)
+    {
+        EPWM_enableIllegalComboLogic(ptr->base, EPWM_MINDB_BLOCK_B);
+        EPWM_selectXbarInput(ptr->base, EPWM_MINDB_BLOCK_B, ptr->IN3_blockB);
+        EPWM_setLutDecX(ptr->base, EPWM_MINDB_BLOCK_B, 0, ptr->BlockB000);
+        EPWM_setLutDecX(ptr->base, EPWM_MINDB_BLOCK_B, 1, ptr->BlockB001);
+        EPWM_setLutDecX(ptr->base, EPWM_MINDB_BLOCK_B, 2, ptr->BlockB010);
+        EPWM_setLutDecX(ptr->base, EPWM_MINDB_BLOCK_B, 3, ptr->BlockB011);
+        EPWM_setLutDecX(ptr->base, EPWM_MINDB_BLOCK_B, 4, ptr->BlockB100);
+        EPWM_setLutDecX(ptr->base, EPWM_MINDB_BLOCK_B, 5, ptr->BlockB101);
+        EPWM_setLutDecX(ptr->base, EPWM_MINDB_BLOCK_B, 6, ptr->BlockB110);
+        EPWM_setLutDecX(ptr->base, EPWM_MINDB_BLOCK_B, 7, ptr->BlockB111);
+    }
+    else
+    {
+        EPWM_disableIllegalComboLogic(ptr->base, EPWM_MINDB_BLOCK_B);
+    }
+
+    // EPWM_disableIllegalComboLogic(ptr->base, EPWM_MINDB_BLOCK_A);
+    // EPWM_enableIllegalComboLogic(ptr->base, EPWM_MINDB_BLOCK_B);
+    // EPWM_selectXbarInput(ptr->base, EPWM_MINDB_BLOCK_B, 0);
+    // EPWM_setLutDecX(ptr->base, EPWM_MINDB_BLOCK_B, 0, 0);
+    // EPWM_setLutDecX(ptr->base, EPWM_MINDB_BLOCK_B, 1, 1);
+    // EPWM_setLutDecX(ptr->base, EPWM_MINDB_BLOCK_B, 2, 0);
+    // EPWM_setLutDecX(ptr->base, EPWM_MINDB_BLOCK_B, 3, 0);
+    // EPWM_setLutDecX(ptr->base, EPWM_MINDB_BLOCK_B, 4, 0);
+    // EPWM_setLutDecX(ptr->base, EPWM_MINDB_BLOCK_B, 5, 1);
+    // EPWM_setLutDecX(ptr->base, EPWM_MINDB_BLOCK_B, 6, 0);
+    // EPWM_setLutDecX(ptr->base, EPWM_MINDB_BLOCK_B, 7, 0);
+}
+
+void epwm_global_load_setup(GlobalLoad_Struct *ptr)
+{
+    if(ptr->EnableGlobalShadowtoActiveLoad)
+    {
+        EPWM_enableGlobalLoad(ptr->base);
+        EPWM_setGlobalLoadTrigger(ptr->base, ptr->GlobalLoadPulseSelection);
+        EPWM_setGlobalLoadEventPrescale(ptr->base, ptr->GlobalLoadStrobePeriod);
+        if(ptr->EnableOneShot)
+        {
+            EPWM_enableGlobalLoadOneShotMode(ptr->base);
+            EPWM_setGlobalLoadOneShotLatch(ptr->base);
+            EPWM_forceGlobalLoadOneShotEvent(ptr->base);
+        }
+        else
+        {
+            EPWM_disableGlobalLoadOneShotMode(ptr->base);           
+        }
+
+        EPWM_setupEPWMLinks(ptr->base, ptr->CurrentLink, EPWM_LINK_GLDCTL2);
+    }
+    #ifdef SOC_AM263PX
+        SOC_setEpwmTbClk(ptr->instance, true);
+    #endif
 }
 
 void epwm_step(EPWMStepStruct *ptr)
